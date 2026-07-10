@@ -1,0 +1,19 @@
+.div-estado-reserva {
+  background: #e6e6e6;
+}
+
+.div-estado-reserva-medico {
+  background: #d7ba0075;
+}
+
+.div-estado-verificado {
+  background: #005fa354;
+}
+
+.div-estado-atendido {
+  background: #1d912273;
+}
+
+.div-estado-no-atendido {
+  background: #80808073;
+}

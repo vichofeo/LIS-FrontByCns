@@ -1,0 +1,59 @@
+.p-panel .p-panel-header {
+  border: 1px solid #dee2e6;
+  padding: 1rem;
+  background: #f8f9fa;
+  color: var(--text-color);
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.p-panel .p-panel-header .p-panel-title {
+  font-weight: 600;
+}
+
+.p-panel .p-panel-header .p-panel-header-icon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--text-color-secondary);
+  border: 0 none;
+  background: transparent;
+  border-radius: 50%;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
+}
+
+.p-panel .p-panel-header .p-panel-header-icon:enabled:hover {
+  color: var(--text-color);
+  border-color: transparent;
+  background: #e9ecef;
+}
+
+.p-panel .p-panel-header .p-panel-header-icon:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #63ffed;
+}
+
+.p-panel.p-panel-toggleable .p-panel-header {
+  padding: 0.5rem 1rem;
+}
+
+.p-panel .p-panel-content {
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  background: #ffffff;
+  color: var(--text-color);
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-top: 0 none;
+}
+
+.p-panel .p-panel-footer {
+  padding: 0.5rem 1rem;
+  border: 1px solid #dee2e6;
+  background: #ffffff;
+  color: var(--text-color);
+  border-top: 0 none;
+}

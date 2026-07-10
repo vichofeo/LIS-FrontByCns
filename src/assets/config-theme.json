@@ -1,0 +1,76 @@
+{
+  "theme": "default",
+  "regional": "",
+  "pgrsalud_orange": {
+    "background-color": "rgb(238, 119, 0)",
+    "color-background-header": "rgb(238, 119, 0)",
+    "primary-color": "rgb(238, 119, 0)",
+    "text-color": "#495057",
+    "text-color-secondary": "#6c757d",
+    "primary-color-text": "#ffffff",
+    "color-menu": "rgb(226, 134, 41)",
+    "color-menu-inactive": "rgb(173, 105, 38)",
+    "color-menu-inactive-hover": "rgb(173, 96, 19)",
+    "background-icon": "#a34905"
+  },
+  "pgrsalud_orange_dark": {
+    "background-color": "rgb(160, 80, 0)",
+    "color-background-header": "rgb(160, 80, 0)",
+    "primary-color": "rgb(160, 80, 0)",
+    "primary-color-text": "#ffffff",
+    "text-color": "#32383c",
+    "text-color-secondary": "#4a4f52",
+    "color-menu": "rgb(140, 85, 30)",
+    "color-menu-inactive": "rgb(120, 65, 20)",
+    "color-menu-inactive-hover": "rgb(110, 55, 15)",
+    "background-icon": "#662d00"
+  },
+  "pgrsalud_blue_dark": {
+    "background-color": "#204a63",
+    "color-background-header": "#204a63",
+    "primary-color": "#54ac94",
+    "text-color": "#204a63",
+    "text-color-secondary": "#204a63",
+    "primary-color-text": "#ffffff",
+    "color-menu": "#204a63",
+    "color-menu-inactive": "#204a63 ",
+    "color-menu-inactive-hover": "#7392bd ",
+    "background-icon": "#64a4cc "
+  },
+  "staging": {
+    "background-color": "rgb(110, 170, 130)",
+    "color-background-header": "rgb(70, 140, 95)",
+    "primary-color": "rgb(27, 94, 32)",
+    "primary-color-text": "#ffffff",
+    "text-color": "#0f1f18",
+    "text-color-secondary": "#2f3f36",
+    "color-menu": "rgb(56, 120, 80)",
+    "color-menu-inactive": "rgb(90, 150, 115)",
+    "color-menu-inactive-hover": "rgb(27, 94, 32)",
+    "background-icon": "rgb(20, 75, 30)"
+  },
+  "develop": {
+    "background-color": "rgb(204, 102, 102)",
+    "color-background-header": "rgb(153, 51, 51)",
+    "primary-color": "rgb(102, 0, 0)",
+    "primary-color-text": "#ffffff",
+    "text-color": "#1a0000",
+    "text-color-secondary": "#330000",
+    "color-menu": "rgb(128, 0, 0)",
+    "color-menu-inactive": "rgb(179, 77, 77)",
+    "color-menu-inactive-hover": "rgb(102, 0, 0)",
+    "background-icon": "rgb(76, 0, 0)"
+  },
+  "default": {
+    "background-color": "#00796B",
+    "color-background-header": "#00796B",
+    "primary-color": "#00796B",
+    "text-color": "#495057",
+    "text-color-secondary": "#6c757d",
+    "primary-color-text": "#ffffff",
+    "color-menu": "#4a9c76",
+    "color-menu-inactive": "#4a9c76",
+    "color-menu-inactive-hover": "#186944",
+    "background-icon": "#024c45"
+  }
+}

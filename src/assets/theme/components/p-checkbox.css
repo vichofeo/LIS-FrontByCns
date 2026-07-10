@@ -1,0 +1,79 @@
+.p-checkbox {
+  width: 20px;
+  height: 20px;
+}
+
+.p-checkbox .p-checkbox-box {
+  border: 2px solid #ced4da;
+  background: #ffffff;
+  width: 20px;
+  height: 20px;
+  color: var(--text-color);
+  border-radius: 4px;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.p-checkbox .p-checkbox-box .p-checkbox-icon {
+  transition-duration: 0.2s;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.p-checkbox .p-checkbox-box:not(.p-disabled):hover {
+  border-color: var(--primary-color);
+}
+
+.p-checkbox .p-checkbox-box:not(.p-disabled).p-focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #63ffed;
+  border-color: var(--primary-color);
+}
+
+.p-checkbox .p-checkbox-box.p-highlight {
+  border-color: var(--primary-color);
+  background: var(--primary-color);
+}
+
+.p-checkbox .p-checkbox-box.p-highlight:not(.p-disabled):hover {
+  border-color: #006156;
+  background: #006156;
+  color: #ffffff;
+}
+
+.p-checkbox.p-error > .p-checkbox-box,
+.p-checkbox.p-invalid > .p-checkbox-box {
+  border-color: #f44336;
+}
+
+p-checkbox.ng-dirty.ng-invalid > .p-checkbox > .p-checkbox-box {
+  border-color: #f44336;
+}
+
+.p-input-filled .p-checkbox .p-checkbox-box {
+  background-color: #f8f9fa;
+}
+
+.p-input-filled .p-checkbox .p-checkbox-box:not(.p-disabled):hover {
+  background-color: #f8f9fa;
+}
+
+.p-input-filled .p-checkbox .p-checkbox-box.p-highlight {
+  background: var(--primary-color);
+}
+
+.p-input-filled .p-checkbox .p-checkbox-box.p-highlight:not(.p-disabled):hover {
+  background: #006156;
+}
+
+.p-checkbox-label {
+  margin-left: 0.5rem;
+}
+
+.p-highlight .p-checkbox .p-checkbox-box {
+  border-color: #ffffff;
+}

@@ -1,0 +1,159 @@
+:host ::ng-deep .tabview-custom {
+  i,
+  span {
+    vertical-align: middle;
+  }
+  span {
+    margin: 0.5rem;
+  }
+}
+
+:host ::ng-deep .p-button {
+  margin-right: 0.25rem;
+}
+
+:host ::ng-deep .p-tabview p {
+  line-height: 1.5;
+  margin: 0;
+}
+
+:host ::ng-deep .p-button {
+  margin-right: 0.25rem;
+}
+
+:host ::ng-deep .p-tabview p {
+  line-height: 1.5;
+  margin: 0;
+}
+$default-radius: 0.25rem;
+.custom-image-upload-wrapper {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  border-radius: $default-radius;
+  background-color: var(--base-color);
+
+  .image-area {
+    width: 150px;
+    height: 150px;
+    border-radius: $default-radius;
+    img {
+      width: auto;
+      max-height: 100%;
+      border-radius: $default-radius;
+    }
+  }
+
+  .input-area {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    padding: 5px 0;
+    background-color: gray;
+    border-bottom-left-radius: $default-radius;
+    border-bottom-right-radius: $default-radius;
+
+    #upload-label {
+      width: 100%;
+      font-size: 90%;
+      cursor: pointer;
+      margin-bottom: 0;
+      text-align: center;
+      color: white !important;
+    }
+  }
+  &:hover {
+    .input-area {
+      opacity: 1;
+    }
+  }
+
+  &.circle {
+    overflow: hidden;
+    border-radius: 50%;
+    .image-area {
+      border-radius: 50%;
+
+      img {
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+:host ::ng-deep .p-dropdown {
+  width: 12rem;
+  height: 3rem;
+  margin: 0;
+}
+
+p-divider {
+  color: lightgray;
+}
+p-card {
+  padding: 3rem;
+}
+.def-time {
+  font-size: 6pt;
+  color: #999;
+  text-align: left;
+}
+
+@media screen and (max-width: 960px) {
+  .p-column-val-p {
+    display: inline;
+    float: right;
+  }
+  .p-column-val-g {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .p-column-val-p {
+    display: none;
+    float: right;
+  }
+  .p-column-val-g {
+    display: inline;
+  }
+}
+
+.text-color {
+  color: red;
+}
+.valor {
+  font-weight: bold;
+  font-size: 130%;
+}
+:host ::ng-deep .p-button {
+  margin: 0 0.5rem 0 0;
+  min-width: 10rem;
+}
+
+p {
+  margin: 0;
+}
+
+.confirmation-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:host ::ng-deep .p-dialog .p-button {
+  min-width: 6rem;
+}
+
+.lbl-value-local {
+  font-weight: bold;
+}

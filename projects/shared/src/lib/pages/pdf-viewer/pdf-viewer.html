@@ -1,0 +1,34 @@
+<p-menubar [model]="menuPdf">
+  <ng-template #start>
+    <div
+      style="width: 30px; height: 30px; border-radius: 4px; cursor: pointer"
+      (click)="op.toggle($event)"
+      [style.background]="backColor"></div>
+    <p-popover #op [style]="{ width: '220px' }">
+      <p-colorpicker [(ngModel)]="color" [inline]="true"> </p-colorpicker>
+      <hr />
+      <button
+        pButton
+        label="Cambiar color"
+        icon="pi pi-save"
+        class="raised-btn p-button-outlined"
+        (click)="op.hide(); changeColor()"
+        style="width: 100%"></button>
+    </p-popover>
+  </ng-template>
+</p-menubar>
+<p-scrollpanel
+  [style]="{
+    height: height,
+    background: '#f3f3f3',
+    border: '1px solid #f3f3f3'
+  }">
+  @if (pdf?.url ) { @if (safePdfUrl(); as safeUrl) {
+  <iframe
+    [src]="safeUrl"
+    width="100%"
+    height="100%"
+    style="border: none; position: absolute; top: 0; right: 0; bottom: 0; left: 0">
+  </iframe>
+  } }
+</p-scrollpanel>

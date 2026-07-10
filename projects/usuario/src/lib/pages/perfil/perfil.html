@@ -1,0 +1,164 @@
+<div class="content-wrapper perfil">
+  <span class="feature-title">Mi perfil</span>
+  <p-card>
+    <div class="perfil grid">
+      <div class="col-12 md:col-4 lg:col-4 text-center">
+        <div class="img-position">
+          <div class="custom-image-upload-wrapper circle mx-xl-auto">
+            <div class="image-area">
+              @if (imageToShow()) {
+              <img [src]="imageToShow()" />
+              }
+            </div>
+          </div>
+        </div>
+        <h5>
+          {{ persona()?.nombres }} {{ persona()?.primerApellido }} {{ persona()?.segundoApellido }}
+        </h5>
+        <p>{{ persona()?.profesionOcupacion }}</p>
+      </div>
+      <div class="col-12 md:col-4 lg:col-4">
+        <div>
+          <div class="media mb-4 mb-xl-5">
+            <i class="pi pi-id-card lbl-image"></i>
+            <span class="lbl-text"> CÉDULA IDENTIDAD</span>
+            <p class="lbl-value">{{ persona()?.numeroDocumento }} {{ persona()?.extencion }}</p>
+          </div>
+          <div class="media mb-4 mb-xl-0">
+            <i class="pi pi-calendar lbl-image"></i>
+            <span class="lbl-text"> FECHA NACIMIENTO</span>
+            <p class="lbl-value">{{ persona()?.fechaNacimiento | date}}</p>
+          </div>
+          <div class="media mb-4 mb-xl-0">
+            <i class="pi pi-user lbl-image"></i>
+            <span class="lbl-text"> GÉNERO</span>
+            <p class="lbl-value">{{ persona()?.genero === 'F' ? 'FEMENINO' : 'MASCULINO' }}</p>
+          </div>
+          <div class="media mb-4 mb-xl-0">
+            <i class="pi pi-credit-card lbl-image"></i>
+            <span class="lbl-text"> MATRÍCULA</span>
+            <p class="lbl-value">{{ persona()?.matricula }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 md:col-4 lg:col-4">
+        <div>
+          <div class="media mb-4 mb-xl-5">
+            <i class="pi pi-phone lbl-image"></i>
+            <span class="lbl-text"> TELÉFONOS</span>
+            <p class="lbl-value">{{ persona()?.telefonos }} • {{ persona()?.celulares }}</p>
+          </div>
+          <div class="media mb-4 mb-xl-0">
+            <i class="pi pi-envelope lbl-image"></i>
+            <span class="lbl-text"> CORREO ELECTRÓNICO</span>
+            <p class="lbl-value">{{ persona()?.correoElectronico }}</p>
+          </div>
+          <div class="media mb-4 mb-xl-0">
+            <i class="pi pi-wifi lbl-image"></i>
+            <span class="lbl-text"> SKYPE</span>
+            <p class="lbl-value">{{ persona()?.skype }}</p>
+          </div>
+          <div class="media mb-4 mb-xl-0">
+            <i class="pi pi-map-marker lbl-image"></i>
+            <span class="lbl-text"> DIRECCIÓN</span>
+            <p class="lbl-value">{{ persona()?.direccion }} • Z. {{ persona()?.zona }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </p-card>
+  <br />
+  <p-card>
+    <p-tabs value="0" (valueChange)="onTabChange($event)">
+      <p-tablist>
+        <p-tab value="0">Datos Empleo</p-tab>
+        <p-tab value="1">Tarjeta</p-tab>
+      </p-tablist>
+      <p-tabpanels>
+        <p-tabpanel value="0">
+          <div class="grid">
+            <div class="col-12 md:col-4 lg:col-4">
+              <div class="media mb-4 mb-xl-5">
+                <span class="lbl-text">NRO. ITEM</span>
+                <p class="lbl-value">
+                  <!-- {{ dataEmpleo()?.cargo?.nroItem }} -->
+                </p>
+              </div>
+              <div class="media mb-4 mb-xl-0">
+                <span class="lbl-text">TIPO</span>
+                <p class="lbl-value">{{ dataEmpleo()?.tipoContrato }}</p>
+              </div>
+              <div class="media mb-4 mb-xl-0">
+                <span class="lbl-text">ESTADO</span>
+                <p class="lbl-value">
+                  <!-- <p-message severity="{{ dataEmpleo()?.estado == 'A' ? 'success' : 'error' }}"
+                    text="{{ estado }}"></p-message> -->
+                </p>
+              </div>
+              <div class="media mb-4 mb-xl-0">
+                <span class="lbl-text">CARGO</span>
+                <!-- <p class="lbl-value">{{ dataEmpleo()?.cargo.descripcion }}</p> -->
+              </div>
+              <div class="media mb-4 mb-xl-0">
+                <span class="lbl-text">NIVEL SALARIAL</span>
+                <!-- <p class="lbl-value">{{ dataEmpleo()?.cargo.nivel }}</p> -->
+              </div>
+              <div class="media mb-4 mb-xl-0">
+                <span class="lbl-text">HABER PRESUPUESTADO</span>
+                <!-- <p class="lbl-value">{{ dataEmpleo()?.cargo.haberPresupuestado }} Bs.</p> -->
+              </div>
+            </div>
+            <div class="col-12 md:col-4 lg:col-4">
+              <div class="media mb-4 mb-xl-5">
+                <span class="lbl-text">REGIONAL</span>
+                <p class="lbl-value">{{ dataEmpleo()?.regionalesDescripcion }}</p>
+              </div>
+              <div class="media mb-4 mb-xl-0">
+                <span class="lbl-text">OFICINA</span>
+                <p class="lbl-value">{{ dataEmpleo()?.oficinasDescripcion }}</p>
+              </div>
+              <div class="media mb-4 mb-xl-0">
+                <span class="lbl-text">DEPARTAMENTO</span>
+                <!-- <p class="lbl-value">
+                  {{
+                  dataEmpleo()?.tipoEmpleadoId == 2
+                  ? dataEmpleo()?.cargo.oficina
+                  : dataEmpleo()?.departamentosDescripcion
+                  }}
+                </p> -->
+              </div>
+              <div class="media mb-4 mb-xl-0">
+                <span class="lbl-text">DIVISIÓN</span>
+                <p class="lbl-value">{{ dataEmpleo()?.divisionesDescripcion }}</p>
+              </div>
+              <div class="media mb-4 mb-xl-0">
+                <span class="lbl-text">SECCIÓN</span>
+                <p class="lbl-value">{{ dataEmpleo()?.seccionesDescripcion }}</p>
+              </div>
+              <div class="media mb-4 mb-xl-0">
+                <span class="lbl-text">UNIDAD</span>
+                <p class="lbl-value">{{ dataEmpleo()?.unidadesDescripcion }}</p>
+              </div>
+            </div>
+            <div class="col-12 md:col-4 lg:col-4">
+              <div class="media mb-4 mb-xl-5">
+                <span class="lbl-text">FECHA INICIO</span>
+                <p class="lbl-value">{{ dataEmpleo()?.fechaInicio }}</p>
+              </div>
+              <div class="media mb-4 mb-xl-0">
+                <span class="lbl-text">FECHA CIERRE</span>
+                <p class="lbl-value">{{ dataEmpleo()?.fechaFin }}</p>
+              </div>
+            </div>
+          </div>
+        </p-tabpanel>
+        <p-tabpanel value="1">
+          @if (reloadTarjeta) {
+          <lib-tarjeta-asistencia [ci]="ci()" [id]="personaId()" [reload]="reloadTarjeta">
+          </lib-tarjeta-asistencia>
+          }
+        </p-tabpanel>
+      </p-tabpanels>
+    </p-tabs>
+  </p-card>
+</div>

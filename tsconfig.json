@@ -1,0 +1,126 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "paths": {
+      "@env/*": [
+        "./src/environments/*"
+      ],
+      "@main/*": [
+        "./src/app/main/*"
+      ],
+      "auth": [
+        "./projects/auth/src/public-api.ts"
+      ],
+      "cita-medica": [
+        "./projects/cita-medica/src/public-api.ts"
+      ],
+      "consulta-externa": [
+        "./projects/consulta-externa/src/public-api.ts"
+      ],
+      "farmacia": [
+        "./projects/farmacia/src/public-api.ts"
+      ],
+      "internacion": [
+        "./projects/internacion/src/public-api.ts"
+      ],
+      "laboratorio": [
+        "./projects/laboratorio/src/public-api.ts"
+      ],
+      "shared": [
+        "./projects/shared/src/public-api.ts"
+      ],
+      "usuario": [
+        "./projects/usuario/src/public-api.ts"
+      ],
+      "vigencia": [
+        "./projects/vigencia/src/public-api.ts"
+      ]
+    },
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "preserve"
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "typeCheckHostBindings": true,
+    "strictTemplates": true
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/cita-medica/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/cita-medica/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/vigencia/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/vigencia/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/usuario/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/usuario/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/farmacia/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/farmacia/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/laboratorio/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/laboratorio/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/auth/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/auth/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/shared/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/shared/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/consulta-externa/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/consulta-externa/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/internacion/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/internacion/tsconfig.spec.json"
+    }
+  ]
+}

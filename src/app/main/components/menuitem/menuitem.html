@@ -1,0 +1,41 @@
+<ng-container>
+  @if (!item.routerLink || item.items) {
+  <a
+    [attr.href]="item.url"
+    (click)="itemClick($event)"
+    (mouseenter)="onMouseEnter()"
+    (keydown.enter)="itemClick($event)"
+    [attr.target]="item.target"
+    [attr.tabindex]="0">
+    <span>{{ item.label }}</span>
+    @if (item.items) {
+    <i class="fa fa-fw fa-angle-down layout-submenu-toggler"></i>
+    } @if (item.badge) {
+    <span class="menuitem-badge" [ngClass]="item.badgeStyleClass"> {{ item.badge }} </span>
+    }
+  </a>
+  } @if (item.routerLink && !item.items) {
+  <a
+    (click)="itemClick($event)"
+    (mouseenter)="onMouseEnter()"
+    [routerLink]="item.routerLink"
+    routerLinkActive="active-menuitem-routerlink"
+    [state]="{ data: { k: item.id } }"
+    [routerLinkActiveOptions]="{ exact: true }"
+    [attr.target]="item.target"
+    [attr.tabindex]="0">
+    <span>{{ item.label }}</span>
+    @if (item.items) {
+    <i class="fa fa-fw fa-angle-down layout-submenu-toggler"></i>
+    } @if (item.badge) {
+    <span class="menuitem-badge" [ngClass]="item.badgeStyleClass"> {{ item.badge }} </span>
+    }
+  </a>
+  } @if (item.items) {
+  <ul class="submenu" [class.submenu-active]="active">
+    @for (child of item.items; track $index; let i = $index) {
+    <li app-menuitem [item]="child" [index]="i" [parentKey]="key" [class]="child.badgeClass"></li>
+    }
+  </ul>
+  }
+</ng-container>

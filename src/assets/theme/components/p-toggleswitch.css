@@ -1,0 +1,3 @@
+.p-toggleswitch.p-toggleswitch-checked .p-toggleswitch-slider {
+  background: var(--primary-color) !important;
+}

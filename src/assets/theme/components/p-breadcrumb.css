@@ -1,0 +1,38 @@
+.p-breadcrumb {
+  background: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+.p-breadcrumb ul li .p-menuitem-link {
+  transition: box-shadow 0.2s;
+  border-radius: 4px;
+}
+
+.p-breadcrumb ul li .p-menuitem-link:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #63ffed;
+}
+
+.p-breadcrumb ul li .p-menuitem-link .p-menuitem-text {
+  color: var(--text-color);
+}
+
+.p-breadcrumb ul li .p-menuitem-link .p-menuitem-icon {
+  color: var(--text-color-secondary);
+}
+
+.p-breadcrumb ul li.p-breadcrumb-chevron {
+  margin: 0 0.5rem 0 0.5rem;
+  color: var(--text-color);
+}
+
+.p-breadcrumb ul li:last-child .p-menuitem-text {
+  color: var(--text-color);
+}
+
+.p-breadcrumb ul li:last-child .p-menuitem-icon {
+  color: var(--text-color-secondary);
+}

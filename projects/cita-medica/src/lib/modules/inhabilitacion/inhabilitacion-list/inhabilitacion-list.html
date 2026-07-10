@@ -1,0 +1,150 @@
+<div class="grid">
+  <div class="col-12 text-center">
+    <span class="feature-title">Inhabilitaciones</span>
+    <div class="grid">
+      @if (regionales.length <= 1) {
+      <div class="col-6 text-right">
+        <span>Regional: </span>
+        <span style="font-weight: bold">{{regional()?.descripcion??''}}</span>
+      </div>
+      } @if (regionales.length > 1) {
+      <div class="col-6">
+        <div class="grid">
+          <div class="col-6"></div>
+          <div class="col-6">
+            <p-select
+              [options]="regionales"
+              [(ngModel)]="regionalSelected"
+              placeholder="Seleccione una regional"
+              (onChange)="onChangeRegional()"
+              [filter]="true"
+              optionLabel="descripcion"
+              optionValue="id">
+            </p-select>
+          </div>
+        </div>
+      </div>
+      } @if (centrosMedicos.length <= 1) {
+      <div class="col-6 text-left">
+        <span style="padding-left: 10px">Centro Médico: </span>
+        <span style="font-weight: bold">{{centroMedico()?.descripcion}}</span>
+      </div>
+      } @if (centrosMedicos.length > 1) {
+      <div class="col-6">
+        <div class="grid">
+          <div class="col-6">
+            <p-select
+              [options]="centrosMedicos"
+              [(ngModel)]="centroMedicoSelected"
+              placeholder="Seleccione un centro médico"
+              (onChange)="onChangeCentroMedico()"
+              [filter]="true"
+              optionLabel="descripcion"
+              optionValue="id">
+            </p-select>
+          </div>
+          <div class="col-6"></div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>
+<div class="grid p-mt-1">
+  <div class="col-12">
+    <div class="card">
+      <p-table
+        #grid
+        [value]="items()"
+        [(selection)]="selectedItem"
+        selectionMode="single"
+        (onRowSelect)="onRowSelect()"
+        (onRowUnselect)="onRowUnselect($event)"
+        [loading]="loadingGrid"
+        class="p-datatable-striped responsive-table"
+        dataKey="id">
+        <ng-template pTemplate="caption">
+          <p-menubar [model]="menuTable">
+            <div>
+              <input
+                type="text"
+                id="search"
+                name="search"
+                pInputText
+                placeholder="Buscar"
+                [(ngModel)]="search"
+                (keyup.enter)="getData(1, 10)"
+                autocomplete="off" />
+            </div>
+          </p-menubar>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="text-center" style="width: 35%">
+              {{centrosMedicos.length === 1? 'Medicos': 'Centro Medico'}}
+            </th>
+            <th class="text-center" style="width: 10%">Descripcion</th>
+            <th class="text-center">Fecha Inicio</th>
+            <th class="text-center">Fecha Fin</th>
+            <th class="text-center">Horario</th>
+            <th class="text-center">Estado</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item let-expanded="expanded">
+          <tr [pSelectableRow]="item">
+            <td class="text-center">
+              <span class="p-column-title"><b>Centro Médico</b></span>
+              @if (centrosMedicos.length === 1) { @for (med of getDescripcionMedicos(item); track
+              med.id) {
+              <span class="list-centro"> {{ med.nombres }} </span>
+              } } @if (centrosMedicos.length > 1) { @for (cen of getDescripcionCentros(item); track
+              cen.id) {
+              <span class="list-centro"> {{ cen.descripcion }} </span>
+              } }
+            </td>
+            <td class="text-center">
+              <span class="p-column-title"><b>Descripcion</b></span>
+              {{ item?.descripcion }}
+            </td>
+            <td class="text-center">
+              <span class="p-column-title"><b>Fecha Inicio</b></span>
+              {{ item?.fechaInicio | date:'dd/MM/yyyy'}}
+            </td>
+            <td class="text-center">
+              <span class="p-column-title"><b>Fecha Fin</b></span>
+              {{ item?.fechaFin | date:'dd/MM/yyyy' }}
+            </td>
+            <td class="text-center">
+              <span class="p-column-title"><b>Horario</b></span>
+              {{item?.horarioCompleto?'JORNADA COMPLETA':item?.horaInicioDetalle+' -
+              '+item?.horaFinDetalle }}
+            </td>
+            <td class="text-center">
+              <span class="p-column-title"><b>Estado</b></span>
+              <span [ngClass]="item?.estado ? 'dot-green' : 'dot-red'"></span>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion" let-item>
+          <tr style="background: #eff5f5">
+            <td colspan="7">
+              <p class="lbl-value">Medicos Asignados:</p>
+              @for (med of medicos(); track med.id) {
+              <span class="list-medica"> {{ med.nombres }} </span>
+              }
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+          <p-paginator
+            [rows]="rows"
+            [totalRecords]="total"
+            (onPageChange)="paginate($event)"></p-paginator>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+<!-- <pgr-cns-inhabilitacion-form [regionalId]="regionalSelected" [centroMedicoId]="centroMedicoSelected" [toggle]="openForm"
+    [data]="dataForm" [params]="params" (onClosed)="handleCloseForm($event)">
+</pgr-cns-inhabilitacion-form> -->

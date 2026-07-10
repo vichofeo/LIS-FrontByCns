@@ -1,0 +1,246 @@
+.p-treetable .p-paginator-top {
+  border-width: 0 0 1px 0;
+  border-radius: 0;
+}
+
+.p-treetable .p-paginator-bottom {
+  border-width: 0 0 1px 0;
+  border-radius: 0;
+}
+
+.p-treetable .p-treetable-header {
+  background: #f8f9fa;
+  color: var(--text-color);
+  border: 1px solid #e9ecef;
+  border-width: 1px 0 1px 0;
+  padding: 1rem 1rem;
+  font-weight: 600;
+}
+
+.p-treetable .p-treetable-footer {
+  background: #f8f9fa;
+  color: var(--text-color);
+  border: 1px solid #e9ecef;
+  border-width: 0 0 1px 0;
+  padding: 1rem 1rem;
+  font-weight: 600;
+}
+
+.p-treetable .p-treetable-thead > tr > th {
+  text-align: left;
+  padding: 1rem 1rem;
+  border: 1px solid #e9ecef;
+  border-width: 0 0 1px 0;
+  font-weight: 600;
+  color: var(--text-color);
+  background: #f8f9fa;
+  transition: box-shadow 0.2s;
+}
+
+.p-treetable .p-treetable-tfoot > tr > td {
+  text-align: left;
+  padding: 1rem 1rem;
+  border: 1px solid #e9ecef;
+  border-width: 0 0 1px 0;
+  font-weight: 600;
+  color: var(--text-color);
+  background: #f8f9fa;
+}
+
+.p-treetable .p-sortable-column {
+  outline-color: #63ffed;
+}
+
+.p-treetable .p-sortable-column .p-sortable-column-icon {
+  color: var(--text-color-secondary);
+  margin-left: 0.5rem;
+}
+
+.p-treetable .p-sortable-column .p-sortable-column-badge {
+  border-radius: 50%;
+  height: 1.143rem;
+  min-width: 1.143rem;
+  line-height: 1.143rem;
+  color: #ffffff;
+  background: var(--primary-color);
+  margin-left: 0.5rem;
+}
+
+.p-treetable .p-sortable-column:not(.p-highlight):hover {
+  background: #e9ecef;
+  color: var(--text-color);
+}
+
+.p-treetable .p-sortable-column:not(.p-highlight):hover .p-sortable-column-icon {
+  color: var(--text-color-secondary);
+}
+
+.p-treetable .p-sortable-column.p-highlight {
+  background: #f8f9fa;
+  color: var(--primary-color);
+}
+
+.p-treetable .p-sortable-column.p-highlight .p-sortable-column-icon {
+  color: var(--primary-color);
+}
+
+.p-treetable .p-treetable-tbody > tr {
+  background: #ffffff;
+  color: var(--text-color);
+  transition: box-shadow 0.2s;
+  outline-color: #63ffed;
+}
+
+.p-treetable .p-treetable-tbody > tr > td {
+  text-align: left;
+  border: 1px solid #e9ecef;
+  border-width: 0 0 1px 0;
+  padding: 1rem 1rem;
+}
+
+.p-treetable .p-treetable-tbody > tr > td .p-treetable-toggler {
+  width: 2rem;
+  height: 2rem;
+  color: var(--text-color-secondary);
+  border: 0 none;
+  background: transparent;
+  border-radius: 50%;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
+  margin-right: 0.5rem;
+}
+
+.p-treetable .p-treetable-tbody > tr > td .p-treetable-toggler:enabled:hover {
+  color: var(--text-color);
+  border-color: transparent;
+  background: #e9ecef;
+}
+
+.p-treetable .p-treetable-tbody > tr > td .p-treetable-toggler:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #63ffed;
+}
+
+.p-treetable .p-treetable-tbody > tr > td p-treetablecheckbox .p-checkbox {
+  margin-right: 0.5rem;
+}
+
+.p-treetable
+  .p-treetable-tbody
+  > tr
+  > td
+  p-treetablecheckbox
+  .p-checkbox
+  .p-indeterminate
+  .p-checkbox-icon {
+  color: var(--text-color);
+}
+
+.p-treetable .p-treetable-tbody > tr.p-highlight {
+  background: var(--primary-color);
+  color: #ffffff;
+}
+
+.p-treetable .p-treetable-tbody > tr.p-highlight .p-treetable-toggler {
+  color: #ffffff;
+}
+
+.p-treetable .p-treetable-tbody > tr.p-highlight .p-treetable-toggler:hover {
+  color: #ffffff;
+}
+
+.p-treetable.p-treetable-hoverable-rows .p-treetable-tbody > tr:not(.p-highlight):hover {
+  background: #e9ecef;
+  color: var(--text-color);
+}
+
+.p-treetable.p-treetable-hoverable-rows
+  .p-treetable-tbody
+  > tr:not(.p-highlight):hover
+  .p-treetable-toggler {
+  color: var(--text-color);
+}
+
+.p-treetable .p-column-resizer-helper {
+  background: var(--primary-color);
+}
+
+.p-treetable .p-treetable-scrollable-header,
+.p-treetable .p-treetable-scrollable-footer {
+  background: #f8f9fa;
+}
+
+.p-treetable .p-treetable-loading-icon {
+  font-size: 2rem;
+}
+
+.p-treetable.p-treetable-gridlines .p-datatable-header {
+  border-width: 1px 1px 0 1px;
+}
+
+.p-treetable.p-treetable-gridlines .p-treetable-footer {
+  border-width: 0 1px 1px 1px;
+}
+
+.p-treetable.p-treetable-gridlines .p-treetable-top {
+  border-width: 0 1px 0 1px;
+}
+
+.p-treetable.p-treetable-gridlines .p-treetable-bottom {
+  border-width: 0 1px 1px 1px;
+}
+
+.p-treetable.p-treetable-gridlines .p-treetable-thead > tr > th {
+  border-width: 1px;
+}
+
+.p-treetable.p-treetable-gridlines .p-treetable-tbody > tr > td {
+  border-width: 1px;
+}
+
+.p-treetable.p-treetable-gridlines .p-treetable-tfoot > tr > td {
+  border-width: 1px;
+}
+
+.p-treetable.p-treetable-sm .p-treetable-header {
+  padding: 0.875rem 0.875rem;
+}
+
+.p-treetable.p-treetable-sm .p-treetable-thead > tr > th {
+  padding: 0.5rem 0.5rem;
+}
+
+.p-treetable.p-treetable-sm .p-treetable-tbody > tr > td {
+  padding: 0.5rem 0.5rem;
+}
+
+.p-treetable.p-treetable-sm .p-treetable-tfoot > tr > td {
+  padding: 0.5rem 0.5rem;
+}
+
+.p-treetable.p-treetable-sm .p-treetable-footer {
+  padding: 0.5rem 0.5rem;
+}
+
+.p-treetable.p-treetable-lg .p-treetable-header {
+  padding: 1.25rem 1.25rem;
+}
+
+.p-treetable.p-treetable-lg .p-treetable-thead > tr > th {
+  padding: 1.25rem 1.25rem;
+}
+
+.p-treetable.p-treetable-lg .p-treetable-tbody > tr > td {
+  padding: 1.25rem 1.25rem;
+}
+
+.p-treetable.p-treetable-lg .p-treetable-tfoot > tr > td {
+  padding: 1.25rem 1.25rem;
+}
+
+.p-treetable.p-treetable-lg .p-treetable-footer {
+  padding: 1.25rem 1.25rem;
+}

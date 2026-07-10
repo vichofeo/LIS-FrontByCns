@@ -1,0 +1,199 @@
+<div class="grid">
+  <div class="col-12 md:col-4 lg:col-4 text-center">
+    <p-select [options]="gestiones()" [ngModel]="gesActual" (onChange)="onChangeGestion($event)">
+    </p-select>
+  </div>
+  <div class="col-12 md:col-4 lg:col-4 text-center">
+    <p-select [options]="meses" [ngModel]="mesActual" optionLabel="nombre" optionValue="code"
+      (onChange)="onChangeMeses($event)">
+    </p-select>
+  </div>
+  <div class="col-12 md:col-4 lg:col-4 text-center"></div>
+
+  <div class="col-12 md:col-8 lg:col-8">
+    <div class="grid mt-3">
+      <div class="col-12">
+        <div class="card">
+          <p-table #grid [value]="dataTarjeta()?.tarjeta ?? []" selectionMode="single"
+            class="p-datatable-striped responsive-table">
+            <ng-template pTemplate="header">
+              <tr>
+                <th class="text-center">Nro</th>
+                <th class="text-center">Día</th>
+                <th class="text-center">Entrada</th>
+                <th class="text-center">Salida</th>
+                <th class="text-center">Entrada</th>
+                <th class="text-center">Salida</th>
+                <th class="text-center">Observaciones</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+              <tr [pSelectableRow]="item" (click)="showResponsiveDialog(item)">
+                <td>
+                  <span class="p-column-title"><b>Nro</b></span>
+                  <span>{{ item.nro }}</span>
+                </td>
+                <td>
+                  <span class="p-column-title"><b>Dia</b></span>
+                  <p class="p-column-val-p">
+                    <b>{{ item.diaCompleto }}</b>
+                  </p>
+                  <p class="p-column-val-g">
+                    <b>{{ item.dia }}</b>
+                  </p>
+                </td>
+                <td>
+                  <span class="p-column-title"><b>Entrada</b></span>
+                  <p class="def-time">{{ item.horaEM }}</p>
+                  <p class="{{ item.minAtraso1 > 0 ? 'text-color' : '' }}">{{ item.entradaM }}</p>
+                </td>
+                <td>
+                  <span class="p-column-title"><b>Salida</b></span>
+                  <p class="def-time">{{ item.horaSM }}</p>
+                  <p>{{ item.salidaM }}</p>
+                </td>
+                <td>
+                  <span class="p-column-title"><b>Entrada</b></span>
+                  <p class="def-time">{{ item.horaET }}</p>
+                  <p class="{{ item.minAtraso2 > 0 ? 'text-color' : '' }}">{{ item.entradaT }}</p>
+                </td>
+                <td>
+                  <span class="p-column-title"><b>Salida</b></span>
+                  <p class="def-time">{{ item.horaST }}</p>
+                  <p>{{ item.salidaT }}</p>
+                </td>
+                <td>
+                  <span class="p-column-title"><b>Observación</b></span>
+                  @for (permiso of item.permisos; track permiso.id) {
+                  <p-tag class="mr-2" [severity]="permiso.tipo" [value]="permiso.titulo"
+                    [pTooltip]="permiso.observacion" tooltipPosition="top">
+                  </p-tag>
+                  }
+                </td>
+                <span class="p-column-title">
+                  <div class="rowspan"></div>
+                </span>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 md:col-4 lg:col-4">
+    <h4 class="text-center">DETALLE DE ASISTENCIA</h4>
+    @if (dataTarjeta()) {
+    <div>
+      <p-message severity="success">
+        <div class="flex items-center gap-2">
+          <i class="pi pi-calendar-times lbl-image"></i>
+          <span class="valor"> {{ dataTarjeta()?.nombreHorario }} </span>
+        </div>
+      </p-message>
+      <p-message severity="success">
+        <div class="flex items-center gap-2">
+          <i class="pi pi-circle-on lbl-image"></i>
+          <div class="ml-2">
+            <span class="valor">{{ dataTarjeta()?.nroDiaTrabajar }}</span> días a trabajar
+          </div>
+        </div>
+      </p-message>
+      <p-message severity="success">
+        <div class="flex items-center gap-2">
+          <i class="pi pi-chevron-circle-left lbl-image"></i>
+          <div class="ml-2">
+            <span class="valor">{{ dataTarjeta()?.toleranciaMinutos }}</span>
+            minutos de tolerancia
+          </div>
+        </div>
+      </p-message>
+      <p-message
+        [severity]="dataTarjeta()?.retrasoMinutos === 0? 'success': (dataTarjeta()?.retrasoMinutos ?? 0) < 105? 'warn': 'error'">
+        <div class="flex items-center gap-2">
+          <i class="pi pi-chevron-circle-left lbl-image"></i>
+          <div class="ml-2">
+            <span class="valor"> {{ dataTarjeta()?.retrasoMinutos }} </span>
+            minutos de atrasos
+          </div>
+        </div>
+      </p-message>
+      <p-message [severity]="restanteMinutos <= 105? 'error': restanteMinutos < 210? 'warn': 'success'">
+        <div class="flex items-center gap-2">
+          <i class="pi pi-chevron-circle-left lbl-image"></i>
+          <div class="ml-2">
+            <span class="valor">{{ dataTarjeta()?.restanteMinutos }}</span>
+            minutos restantes
+          </div>
+        </div>
+      </p-message>
+      <p-message [severity]="dataTarjeta()?.abandonoIngreso === 0 ? 'success' : 'error' ">
+        <div class="flex items-center gap-2">
+          <i class="pi pi-caret-right lbl-image"></i>
+          <div class="ml-2">
+            <span class="valor">{{ dataTarjeta()?.abandonoIngreso }}</span>
+            abandonos ingreso
+          </div>
+        </div>
+      </p-message>
+      <p-message [severity]=" dataTarjeta()?.abandonoSalida === 0 ? 'success' : 'error' ">
+        <div class="flex items-center gap-2">
+          <i class="pi pi-caret-left lbl-image"></i>
+          <div class="ml-2">
+            <span class="valor">{{ dataTarjeta()?.abandonoSalida }}</span>
+            abandono salida
+          </div>
+        </div>
+      </p-message>
+      <p-message [severity]="
+          dataTarjeta()?.faltasDiaCompleto === 0 ? 'success' : 'error'">
+        <div class="flex items-center gap-2">
+          <i class="pi pi-caret-down lbl-image"></i>
+          <div class="ml-2">
+            <span class="valor">{{ dataTarjeta()?.faltasDiaCompleto }}</span>
+            falta día completo
+          </div>
+        </div>
+      </p-message>
+      <p-message [severity]=" dataTarjeta()?.totalFaltas === 0 ? 'success' : 'error'">
+        <div class="flex items-center gap-2">
+          <i class="pi pi-times-circle lbl-image"></i>
+          <div class="ml-2">
+            <span class="valor">{{ dataTarjeta()?.totalFaltas }}</span> total faltas
+          </div>
+        </div>
+      </p-message>
+    </div>
+    }
+  </div>
+</div>
+<p-dialog [header]="eventos?.fechaformato ?? ''" [(visible)]="displayResponsive" [modal]="true"
+  [breakpoints]="{ '960px': '75vw' }" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+  <div class="col-12 md:col-12 lg:col-12">
+    @if (eventos?.marcacionExcepcion) {
+    <div class="media mb-12 mb-xl-0">
+      <span class="lbl-text">Marcaciones</span>
+      <ul class="lbl-value-local">
+        @for (ex of eventos?.marcacionExcepcion; track $index) {
+        <p-tag class="mr-2" severity="warn" [value]="ex"> </p-tag>
+        }
+      </ul>
+    </div>
+    } @if (eventos?.permisos) {
+    <div class="media mb-12 mb-xl-0">
+      <span class="lbl-text">Observaciones</span>
+      <ul class="lbl-value-local">
+        @for (p of eventos?.permisos; track $index) {
+        <li>{{ p.titulo }} {{ p.observacion }}</li>
+        }
+      </ul>
+    </div>
+    } @if (!eventos?.permisos && !eventos?.marcacionExcepcion) {
+    <div class="media mb-12 mb-xl-0">
+      <h1 class="text-center">Sin información</h1>
+    </div>
+    }
+  </div>
+  <div class="flex justify-content-end gap-2">
+    <p-button (click)="displayResponsive.set(false)" label="Cerrar" styleClass="p-button-text"></p-button>
+  </div>
+</p-dialog>

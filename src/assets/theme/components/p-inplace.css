@@ -1,0 +1,20 @@
+.p-inplace .p-inplace-display {
+  padding: 0.5rem 0.5rem;
+  border-radius: 4px;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.p-inplace .p-inplace-display:not(.p-disabled):hover {
+  background: #e9ecef;
+  color: var(--text-color);
+}
+
+.p-inplace .p-inplace-display:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #63ffed;
+}

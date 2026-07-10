@@ -1,0 +1,4 @@
+.p-datepicker-day-selected {
+  color: #ffffff !important;
+  background: var(--primary-color) !important;
+}

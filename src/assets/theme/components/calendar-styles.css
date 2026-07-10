@@ -1,0 +1,84 @@
+/* ===== ESTILOS PERSONALIZADOS PARA CALENDARIO ===== */
+
+/* Estilos para diferentes estados de días */
+
+.custom-calendar .p-datepicker-calendar td span.dia-ocupado {
+  background-color: #ffcdd2 !important;
+  color: #d32f2f !important;
+  border-radius: 50% !important;
+  font-weight: bold !important;
+}
+
+.custom-calendar .p-datepicker-calendar td span.dia-parcial {
+  background-color: #fff3e0 !important;
+  color: #f57c00 !important;
+  border-radius: 50% !important;
+  font-weight: bold !important;
+}
+
+/* Efectos hover */
+.custom-calendar .p-datepicker-calendar td:not(.p-datepicker-other-month) span:hover {
+  transform: scale(1.1) !important;
+  transition: transform 0.2s ease !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Día seleccionado */
+.custom-calendar .p-datepicker-calendar td.p-highlight span {
+  box-shadow: 0 0 0 2px #007ad9 !important;
+}
+
+/* Posicionamiento para iconos */
+.custom-calendar .p-datepicker-calendar td span {
+  position: relative;
+}
+
+/* Tooltip para días ocupados usando title attribute nativo */
+.custom-calendar .p-datepicker-calendar td span.dia-ocupado {
+  position: relative !important;
+}
+
+.custom-calendar .p-datepicker-calendar td span.dia-ocupado::after {
+  content: '✕';
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  font-size: 8px;
+  color: #f44336;
+  font-weight: bold;
+  z-index: 1;
+}
+
+.custom-calendar .p-datepicker-calendar td span.dia-parcial::after {
+  content: '◐';
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  font-size: 8px;
+  color: #ff9800;
+  font-weight: bold;
+}
+
+/* Estilos adicionales para mejorar la visualización */
+.custom-calendar .p-datepicker-calendar td {
+  padding: 2px !important;
+}
+
+.custom-calendar .p-datepicker-calendar td span {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 32px !important;
+  min-width: 32px !important;
+}
+
+/* Animación suave para cambios de estado */
+.custom-calendar .p-datepicker-calendar td span {
+  transition: all 0.3s ease !important;
+}
+
+/* Mejoras de accesibilidad */
+.custom-calendar .p-datepicker-calendar td span[aria-selected='true'] {
+  outline: 2px solid #007ad9 !important;
+  outline-offset: 2px !important;
+}

@@ -1,0 +1,55 @@
+<div class="topbar">
+  <div class="topbar-main">
+    <a href="#" id="menu-button" (click)="layout.onMenuButtonClick($event)">
+      <span class="pi pi-bars"></span>
+    </a>
+
+    <a href="/admin">
+      <img alt="pgrCNS" id="logo-pgr" src="/assets/layout/images/logo-pgr.png" class="logo" style="width: 100px" />
+    </a>
+
+    <div class="app-name hidden md:inline-flex">
+      <a routerLink="/admin">
+        Caja Nacional de Salud @if (regional.length > 0) {
+        <br />
+        <p class="lbl-regional">{{ regional }}</p>
+        }
+      </a>
+    </div>
+    <div style="float: right">
+      <span class="fa-stack has-badge cns-manuales" (click)="onManualButtonClick($event)">
+        <i class="fa fa-circle fa-stack-2x header-icon"></i>
+        <i class="fa fa-book fa-stack-1x fa-inverse"></i>
+      </span>
+      <span class="fa-stack has-badge cns-versiones" (click)="onVersionesButtonClick()">
+        <i class="fa fa-circle fa-stack-2x header-icon"></i>
+        <i class="fa fa-gear fa-stack-1x fa-inverse"></i>
+      </span>
+      <a href="#" id="user-display" style="display: inline-block" (click)="layout.onTopbarMenuButtonClick($event)">
+        <span class="username">{{ user()?.name | titlecase }}</span>
+        <span class="userrole">{{ user()?.username | titlecase }}</span>
+        <img alt="main logo" src="/assets/layout/images/user-cns.png" style="background-color: white" />
+      </a>
+    </div>
+
+    <ul id="topbar-menu" class="fadeInDown animated" [ngClass]="{ 'topbar-menu-visible': layout.topbarMenuActive }">
+      <li #settings [ngClass]="{ 'menuitem-active': layout.activeTopbarItem === settings }">
+        <a href="#" (click)="setting($event)">
+          <i class="topbar-icon pi pi-cog"></i>
+          <span class="topbar-item-name">&nbsp;&nbsp;Administrar Cuenta</span>
+        </a>
+      </li>
+      <li #settings [ngClass]="{ 'menuitem-active': layout.activeTopbarItem === settings }">
+        <a (click)="getPerfil()">
+          <i class="topbar-icon pi pi-user"></i>
+          <span class="topbar-item-name">&nbsp;&nbsp;Mi perfil</span>
+        </a>
+        <a (click)="layout.logout()">
+          <i class="topbar-icon fa fa-fw fa-sign-out"></i>
+          <span class="topbar-item-name">Cerrar sesión</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <app-menu></app-menu>
+</div>

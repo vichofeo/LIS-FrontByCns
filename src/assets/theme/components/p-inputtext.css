@@ -1,0 +1,112 @@
+p-inputmask.ng-dirty.ng-invalid > .p-inputtext {
+  border-color: #f44336;
+}
+
+p-inputnumber.ng-dirty.ng-invalid > .p-inputnumber > .p-inputtext {
+  border-color: #f44336;
+}
+
+.p-inputtext {
+  font-family: 'Lato', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+  color: var(--text-color);
+  background: #ffffff;
+  padding: 0.5rem 0.5rem;
+  border: 1px solid #ced4da;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+  appearance: none;
+  border-radius: 4px;
+}
+
+.p-inputtext:enabled:hover {
+  border-color: var(--primary-color);
+}
+
+.p-inputtext:enabled:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #63ffed;
+  border-color: var(--primary-color);
+}
+
+.p-inputtext.p-error,
+.p-inputtext.p-invalid,
+.p-inputtext.ng-dirty.ng-invalid {
+  border-color: #f44336;
+}
+
+.p-inputtext.p-inputtext-sm {
+  font-size: 0.875rem;
+  padding: 0.4375rem 0.4375rem;
+}
+
+.p-inputtext.p-inputtext-lg {
+  font-size: 1.25rem;
+  padding: 0.625rem 0.625rem;
+}
+
+.p-float-label > label {
+  left: 0.5rem;
+  color: var(--text-color-secondary);
+  transition-duration: 0.2s;
+}
+
+.p-input-icon-left > i:first-of-type {
+  left: 0.5rem;
+  color: var(--text-color-secondary);
+}
+
+.p-input-icon-left > .p-inputtext {
+  padding-left: 2rem;
+}
+
+.p-input-icon-right > i:last-of-type {
+  right: 0.5rem;
+  color: var(--text-color-secondary);
+}
+
+.p-input-icon-right > .p-inputtext {
+  padding-right: 2rem;
+}
+
+::-webkit-input-placeholder {
+  color: var(--text-color-secondary);
+}
+
+:-moz-placeholder {
+  color: var(--text-color-secondary);
+}
+
+::-moz-placeholder {
+  color: var(--text-color-secondary);
+}
+
+:-ms-input-placeholder {
+  color: var(--text-color-secondary);
+}
+
+.p-input-filled .p-inputtext {
+  background-color: #f8f9fa;
+}
+
+.p-input-filled .p-inputtext:enabled:hover {
+  background-color: #f8f9fa;
+}
+
+.p-input-filled .p-inputtext:enabled:focus {
+  background-color: #ffffff;
+}
+
+.p-inputtext-sm .p-inputtext {
+  font-size: 0.875rem;
+  padding: 0.4375rem 0.4375rem;
+}
+
+.p-inputtext-lg .p-inputtext {
+  font-size: 1.25rem;
+  padding: 0.625rem 0.625rem;
+}

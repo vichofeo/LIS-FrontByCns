@@ -1,0 +1,7 @@
+export * from './consultorio.service'
+export * from './centro-medico.service'
+export * from './parametricas.service'
+export * from './asegurado.service'
+export * from './adscripcion-temporal.service'
+export * from './vigencia.service'
+export * from './adscripcion.service'

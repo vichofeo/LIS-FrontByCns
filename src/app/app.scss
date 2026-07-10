@@ -1,0 +1,130 @@
+.layout-config {
+  width: 20em !important;
+  // background: #999;
+}
+
+/*** VARIABLES ***/
+/* Colors */
+$black: #1d1f20;
+$blue: #83e4e2;
+$green: #a2ed56;
+$yellow: #fddc32;
+$white: #fafafa;
+
+/*** EXTEND ***/
+/* box-shadow */
+%boxshadow {
+  box-shadow:
+    0.25rem 0.25rem 0.6rem rgba(0, 0, 0, 0.05),
+    0 0.5rem 1.125rem rgba(75, 0, 0, 0.05);
+}
+
+/*** STYLE ***/
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+ol.gradient-list {
+  counter-reset: gradient-counter;
+  list-style: none;
+  margin: 1.75rem 0;
+  padding-left: 1rem;
+
+  > li {
+    border-radius: 0 0.5rem 0.5rem 0.5rem;
+    @extend %boxshadow;
+    counter-increment: gradient-counter;
+    margin-top: 1rem;
+    // min-height: 3rem;
+    color: var(--color-text);
+    padding: 1rem 1rem 1rem 1rem;
+    position: relative;
+
+    &::before,
+    &::after {
+      // background: linear-gradient(135deg, $blue 0%, $green 100%);
+      background: #00796b;
+      border-radius: 1rem 1rem 0 1rem;
+      content: '';
+      height: 2rem;
+      left: -1rem;
+      overflow: hidden;
+      position: absolute;
+      top: -1rem;
+      width: 2rem;
+    }
+
+    &::before {
+      align-items: flex-end;
+      @extend %boxshadow;
+      // content: counter(gradient-counter);
+      content: counter(gradient-counter);
+      color: $white;
+      display: flex;
+      font: 900 1em/1 'Montserrat';
+      justify-content: flex-end;
+      padding: 0.125em 0.25em;
+      z-index: 1;
+    }
+
+    @for $i from 1 through 5 {
+      &:nth-child(10n + #{$i}):before {
+        background: var(--primary-color);
+        // background: linear-gradient(135deg, rgba($green, $i * 0.2) 0%, rgba($yellow, $i * 0.2) 100%);
+      }
+    }
+
+    @for $i from 6 through 10 {
+      &:nth-child(10n + #{$i}):before {
+        background: var(--primary-color);
+        // background: linear-gradient(
+        //   135deg,
+        //   rgba($green, 1 - (($i - 5) * 0.2)) 0%,
+        //   rgba($yellow, 1 - (($i - 5) * 0.2)) 100%
+        // );
+      }
+    }
+
+    + li {
+      margin-top: 2rem;
+    }
+  }
+}
+
+.back-red {
+  border: 1px solid rgb(255 0 0);
+}
+
+.back-yellow {
+  background-color: rgba(255, 255, 0, 0.2);
+}
+
+.cns-ico {
+  color: var(--primary-color);
+}
+
+.cns-ico a {
+  color: #666;
+}
+
+.cns-sub-title {
+  font-weight: bold;
+}
+
+.cns-contacto {
+  color: #666;
+  text-align: center;
+  font-size: 12px;
+}
+
+.cns-manual {
+  font-size: 15px;
+}
+
+.cns-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}

@@ -1,0 +1,672 @@
+/* You can add global styles to this file, and also import other style files */
+@use './assets/vars';
+@use '@fortawesome/fontawesome-free/css/all.min.css';
+
+body {
+  overflow-x: hidden !important;
+  /* Hide horizontal scrollbar */
+}
+
+.layout-wrapper .layout-content {
+  padding: 60px 0 0 0 !important;
+}
+
+.content-section {
+  display: block;
+  padding: 10px 10px 0 10px;
+  overflow: hidden;
+}
+
+.content-section.introduction {
+  background: #f8f9fa;
+  color: #191616;
+  text-align: center;
+
+  a {
+    color: #ffffff;
+    font-weight: 600;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .subitem {
+    font-weight: normal;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  +.content-section {
+    border-top: 0 none;
+  }
+}
+
+.feature-title {
+  font-size: 16px;
+  padding-top: 5px;
+  padding-bottom: 3px;
+  display: block;
+  font-weight: 600;
+}
+
+.implementation {
+  background-color: #ffffff;
+  overflow: visible;
+
+  h3 {
+    margin-top: 30px;
+    color: #333333;
+    font-weight: 400;
+    font-size: 1.5em;
+  }
+
+  >h3:first-child {
+    margin-top: 0px;
+  }
+
+  h3.first {
+    margin-top: 0px !important;
+  }
+
+  h4 {
+    color: #333333;
+  }
+}
+
+.p-inputtext,
+.p-select {
+  width: 100%;
+
+  .p-select-label-container {
+    width: 100%;
+  }
+
+}
+
+.p-inputtext,
+.p-select {
+  width: 100%;
+
+  .p-select-label-container {
+    width: 100%;
+  }
+}
+
+.toolbar-title {
+  margin-top: 5px;
+}
+
+.action-content {
+  padding-top: 25px;
+}
+
+.error-message {
+  .p-message {
+    margin: 0 0 0 0;
+    width: 100%;
+  }
+}
+
+.form-card {
+  .card {
+    border-radius: 3px;
+    border: 2px solid #dce2e7;
+  }
+}
+
+.lblFilter {
+  text-align: right;
+  margin-top: 4px;
+  font-weight: 900;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .lblFilter {
+    text-align: left;
+  }
+}
+
+.lbl-prompt {
+  text-align: right;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.div-prompt {
+  text-align: right;
+}
+
+@media only screen and (min-width: 767px) {
+  .div-prompt {
+    text-align: left;
+  }
+}
+
+.lbl-value {
+  padding-left: 5px;
+  margin-top: 4px;
+  font-weight: bold;
+}
+
+.lblKey {
+  text-align: right;
+  font-weight: 900;
+}
+
+.inputFilter {
+  text-align: inherit;
+}
+
+.lblDescription {
+  text-align: inherit;
+  margin-top: 4px;
+}
+
+.list-table {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.blockp-blur {
+  filter: blur(3px);
+  pointer-events: none;
+}
+
+@media only screen and (max-width: 640px) {
+  tbody {
+    tr {
+      td {
+        border: 0px !important;
+      }
+    }
+  }
+
+  .p-menubar-custom {
+    width: 100%;
+  }
+
+  .lblKey {
+    text-align: left;
+    font-weight: 900;
+  }
+}
+
+.label-form {
+  font-weight: normal;
+  pointer-events: none;
+  margin-top: -0.5em;
+  transition: 0.3s ease all;
+  -moz-transition: 0.3s ease all;
+  -webkit-transition: 0.3s ease all;
+  color: #898989;
+  line-height: 1.3;
+  margin-bottom: 0em !important;
+}
+
+.cnsValidator {
+  border-color: red !important;
+
+  .p-dropdown,
+  .p-inputtext {
+    border-color: red;
+  }
+
+  .p-autocomplete-input {
+    border-color: red;
+  }
+
+  .p-multiselect p-component {
+    border-color: red;
+  }
+
+  .p-multiselect {
+    border-color: red;
+  }
+
+  .p-selectbutton .p-component {
+    border-color: red;
+  }
+}
+
+.p-error {
+  font-size: 12px;
+}
+
+.disabled-input {
+  color: blue;
+  font-weight: 900 !important;
+  opacity: 0.9 !important;
+  text-align: right;
+  pointer-events: none;
+}
+
+.p-chkbox .p-chkbox-box .p-chkbox-icon {
+  width: 21px !important;
+  height: 21px !important;
+  font-size: 14px !important;
+}
+
+.p-chkbox .p-chkbox-box {
+  width: 21px !important;
+  height: 21px !important;
+}
+
+.white-space {
+  width: 30px;
+}
+
+form {
+  .p-autocomplete {
+    width: 100% !important;
+  }
+}
+
+.p-autocomplete {
+  width: 100% !important;
+}
+
+hr.divisor {
+  border-top: 1px solid #dce2e7;
+  width: 100%;
+}
+
+.fixed-back_button {
+  position: fixed;
+  right: 10px;
+  z-index: 9000;
+}
+
+fieldset {
+  background-color: #ffffff !important;
+}
+
+p-dialog {
+  .p-widget-header {
+    background-color: #bec6cc !important;
+  }
+}
+
+.c-dialog-overflow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow-y: scroll;
+}
+
+.p-toolbar-group-right {
+  float: right;
+}
+
+.p-toolbar {
+  background-color: #f5f8f9;
+  border-color: #dce2e7;
+  padding: 0.5em 1em;
+}
+
+.dot-green {
+  height: 17px;
+  width: 17px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-yellow {
+  height: 17px;
+  width: 17px;
+  background-color: #ffff05;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-red {
+  height: 17px;
+  width: 17px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-gray {
+  height: 17px;
+  width: 17px;
+  background-color: grey;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-black {
+  height: 17px;
+  width: 17px;
+  background-color: black;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.p-selectbutton {
+  .button {
+    background: #fcfcfd;
+    border: 1px solid #ced4da;
+    color: #565353;
+    transition:
+      background-color 0.15s,
+      border-color 0.15s,
+      box-shadow 0.15s;
+  }
+}
+
+.w10 {
+  width: 10%;
+}
+
+.w15 {
+  width: 15%;
+}
+
+.w25 {
+  width: 25%;
+}
+
+.w40 {
+  width: 40%;
+}
+
+.responsive-table .p-column-title {
+  display: none;
+}
+
+@media screen and (max-width: 40rem) {
+  .responsive-table .p-datatable-thead {
+    display: none;
+  }
+
+  .responsive-table .p-datatable-tbody>tr {
+    display: block;
+    border-bottom: 1px solid var(--p-content-border-color);
+    margin-bottom: 1rem;
+  }
+
+  .responsive-table .p-datatable-tbody>tr>td {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    width: 100% !important;
+    border: 0 none !important;
+    text-align: left !important;
+  }
+
+  .responsive-table .p-column-title {
+    display: inline-flex;
+    font-weight: 600;
+    min-width: 40%;
+  }
+}
+
+.swal2-styled {
+  background-color: #00796b !important;
+}
+
+.layout-config-button {
+  top: 15% !important;
+  width: 6rem !important;
+  font-weight: bolder;
+  font-size: 1.2rem !important;
+
+  i {
+    font-size: 1rem !important;
+  }
+}
+
+.p-inputnumber-input {
+  text-align: right !important;
+}
+
+p-menubar {
+
+  .p-inputtext,
+  .p-dropdown {
+    width: auto !important;
+  }
+}
+
+.stickyMenu {
+  display: contents !important;
+
+  .col {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 60px;
+    background-color: #f8f9fa;
+    z-index: 100;
+  }
+
+  .p-menubar {
+    border: none !important;
+  }
+}
+
+.p-pl-none {
+  padding-left: 0px !important;
+
+  .p-button.p-button-icon-only {
+    width: auto !important;
+    border: none !important;
+  }
+
+  .p-button:focus {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 0 transparent !important;
+  }
+
+  .p-button:hover {
+    background-color: transparent !important;
+  }
+}
+
+.commonButtons {
+
+  .p-menuitem-text,
+  .p-menuitem-icon {
+    color: #495057;
+  }
+}
+
+.moreButtons {
+
+  .p-menuitem-text,
+  .p-menuitem-icon {
+    color: #495057;
+  }
+}
+
+.fieldsetGrid {
+  .p-fieldset-content {
+    padding: 0px !important;
+  }
+}
+
+.p-fileupload-buttonbar {
+  .p-button {
+    background-color: transparent !important;
+    color: #00796b !important;
+    border: 1px solid !important;
+  }
+}
+
+.p-colorpicker {
+  .p-inputtext {
+    width: 30px !important;
+  }
+}
+
+.p-component-overlay-enter {
+  animation: p-component-overlay-enter-animation 150ms forwards;
+}
+
+.p-component-overlay-leave {
+  animation: p-component-overlay-leave-animation 150ms forwards;
+}
+
+@keyframes p-component-overlay-enter-animation {
+  from {
+    background-color: transparent;
+  }
+
+  to {
+    background-color: var(--maskbg);
+  }
+}
+
+@keyframes p-component-overlay-leave-animation {
+  from {
+    background-color: var(--maskbg);
+  }
+
+  to {
+    background-color: transparent;
+  }
+}
+
+.content-wrapper {
+  padding: 1rem;
+}
+
+.perfil {
+  .img-position {
+    width: 150px;
+    margin: auto;
+  }
+
+  .lbl-image {
+    font-size: 1.5rem;
+    color: #00796b;
+    padding-right: 5px;
+  }
+
+  .lbl-text {
+    position: relative;
+    top: -3px;
+    color: #999;
+  }
+
+  .lbl-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding-left: 10px;
+  }
+}
+
+.inactive-employee {
+  background: #ffcdd2;
+  color: #c63737;
+  padding: 0px 10px;
+}
+
+.active-employee {
+  background: #c8e6c9;
+  color: #256029;
+  padding: 0px 10px;
+}
+
+div.p-dialog-header {
+  background-color: var(--color-background-header) !important;
+}
+
+div.p-dialog-footer {
+  background-color: var(--color-background-footer) !important;
+  justify-content: center;
+  align-items: center;
+}
+
+div.p-dialog-header span {
+  color: var(--color-text-header);
+}
+
+.content-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-right {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+:host ::ng-deep .p-multiselect {
+  min-width: 15rem;
+}
+
+:host ::ng-deep .multiselect-custom-virtual-scroll .p-multiselect {
+  min-width: 20rem;
+}
+
+:host ::ng-deep .multiselect-custom {
+  .p-multiselect-label {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .country-item-value {
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    display: inline-flex;
+    margin-right: 0.5rem;
+    background-color: var(--primary-color);
+    color: var(--primary-color-text);
+
+    img.flag {
+      width: 17px;
+    }
+  }
+
+  .country-placeholder {
+    padding: 0.25rem;
+  }
+}
+
+.div-border {
+  border: 2px solid #afafaf;
+  border-radius: (0.5rem);
+  background: #f8f8f8;
+}
+
+.dias-semana {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.dia {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 9px;
+}
+
+.dia span {
+  margin-bottom: 0;
+  margin-right: 1px;
+}
+
+input[type='checkbox'] {
+  width: 11px;
+  height: 11px;
+  cursor: default;
+}
+
+.p-dialog-content {
+  overflow-y: auto;
+}
+
+.lbl-icon {
+  font-size: 1rem;
+  color: var(--color-icon-field) !important;
+  padding-right: 5px;
+  padding-left: 10px;
+}

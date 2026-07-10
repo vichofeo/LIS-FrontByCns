@@ -1,0 +1,116 @@
+<div class="grid">
+  <div class="col-12 text-center">
+    <span class="feature-title">ADMINISTRACIÓN DE USUARIOS</span>
+    <div class="grid">
+      @if (regionales.length <= 1) { <div class="col-6 text-right">
+        <span>Regional: </span>
+        <span style="font-weight: bold">{{getdescripcionRegional(regionalSelected())}}</span>
+    </div>
+    } @if (regionales.length > 1) {
+    <div class="col-6">
+      <div class="grid">
+        <div class="col-6"></div>
+        <div class="col-6">
+          <p-select [options]="regionales()" placeholder="Seleccione una regional" (onChange)="onChangeRegional()"
+            [filter]="true" optionLabel="descripcion" optionValue="id">
+          </p-select>
+        </div>
+      </div>
+    </div>
+    } @if (centrosMedicos.length <= 1) { <div class="col-6 text-left">
+      <span style="padding-left: 10px">Centro Médico: </span>
+      <span style="font-weight: bold">{{getDescripcionCentroMedico(centroMedicoSelected())}}</span>
+  </div>
+  } @if (centrosMedicos.length > 1) {
+  <div class="col-6">
+    <div class="grid">
+      <div class="col-6">
+        <p-select [options]="centrosMedicos()" [(ngModel)]="centroMedicoSelected"
+          placeholder="Seleccione un centro médico" (onChange)="onChangeCentroMedico()" [filter]="true"
+          optionLabel="descripcion" optionValue="id">
+        </p-select>
+      </div>
+      <div class="col-6"></div>
+    </div>
+  </div>
+  }
+</div>
+</div>
+</div>
+<div class="grid stickyMenu">
+  <div class="col">
+    <p-menubar [model]="menuTable">
+      <div>
+        <input type="text" pInputText placeholder="Buscar" [(ngModel)]="search" (keyup.enter)="getData(1, 10)" />
+      </div>
+    </p-menubar>
+  </div>
+</div>
+<div class="content-section implementation form-card">
+  <div class="grid">
+    <div class="col-12 md:col-3"></div>
+    <div class="col-12 md:col-6">
+      <div class="grid">
+        <div class="lblFilter col-5">Estado:</div>
+        <div class="inputFilter col-7">
+          <p-select [options]="estados()" [(ngModel)]="estadoSelected" placeholder="Seleccione una regional"
+            (onChange)="onChangeEstado()" [filter]="true" optionLabel="label" optionValue="value">
+          </p-select>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 md:col-3"></div>
+  </div>
+  <div class="grid p-mt-1">
+    <div class="col-12">
+      <div class="card">
+        <p-table #grid [value]="items()" [(selection)]="selectedItem" selectionMode="single"
+          (onRowSelect)="onRowSelect()" (onRowUnselect)="onRowUnselect()" [loading]="loadingGrid"
+          class="p-datatable-striped responsive-table">
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="text-center">Usuario</th>
+              <th class="text-center">Datos Personales</th>
+              <th class="text-center">Documento Identidad</th>
+              <th class="text-center">Estado</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-item>
+            <tr [pSelectableRow]="item">
+              <td class="text-center">
+                <span class="p-column-title"><b>Usuario</b></span>{{ item.usuario?.userName }}
+              </td>
+              <td class="text-center">
+                <span class="p-column-title"><b>Datos Personales</b></span>{{ item.usuario?.nombres }}
+              </td>
+              <td class="text-center">
+                <span class="p-column-title"><b>Documento Identidad</b></span>{{ item.usuario?.numeroDocumento }}
+              </td>
+              <td class="text-center">
+                <span class="p-column-title"><b>Estado</b></span><span
+                  [ngClass]="item.estado ? 'dot-green' : 'dot-red'"></span>
+              </td>
+              <span class="p-column-title">
+                <div class="rowspan"></div>
+              </span>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+            <p-paginator [rows]="rows" [totalRecords]="total" (onPageChange)="paginate($event)"></p-paginator>
+          </ng-template>
+        </p-table>
+        <div class="flex flex-wrap card-container" style="max-width: 250px">
+          <div class="flex align-items-center justify-content-center" style="min-width: 80px; min-height: 25px">
+            <span class="dot-green"></span><span style="padding-left: 4px">Activo</span>
+          </div>
+          <div class="flex align-items-center justify-content-center" style="min-width: 80px; min-height: 25px">
+            <span class="dot-red"></span><span style="padding-left: 4px">Inactivo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p-confirmDialog [style]="{ width: '50vw' }" [baseZIndex]="10000"></p-confirmDialog>
+<lib-consultorio-usuario-form [toggle]="openForm" [data]="dataForm" [regionalId]="regionalSelected()" [params]="params"
+  [centroMedicoId]="centroMedicoSelected()" (closed)="handleCloseForm($event)"></lib-consultorio-usuario-form>

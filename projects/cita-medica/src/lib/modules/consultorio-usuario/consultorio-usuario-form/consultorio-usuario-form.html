@@ -1,0 +1,97 @@
+<p-dialog [(visible)]="toggle" [breakpoints]="{'960px': '75vw', '640px': '100vw'}"
+  [style]="{width: '70vw', height:'auto'}" [header]="title" (onHide)="close(false)" [modal]="true" styleClass="p-fluid"
+  [contentStyle]="{'overflow':'visible'}" [maximizable]="false" [baseZIndex]="10000" [draggable]="false"
+  [resizable]="false">
+  <br />
+  <form [formGroup]="dataForm" (ngSubmit)="saveData()">
+    <div class="p-fluid formgrid grid">
+      <div class="field col-12 md:col-8 lg:col-6 xl:col-6 inputFilter">
+        <div class="label-form">Médico:</div>
+        <p-autoComplete formControlName="usuario" [suggestions]="usuarios()" optionLabel="nombres"
+          (completeMethod)="searchUsuarios($event)">
+          <ng-template let-user pTemplate="item"> {{ user.nombres }} </ng-template>
+          <ng-template let-user pTemplate="selectedItem"> {{ user?.nombres }} </ng-template>
+        </p-autoComplete>
+      </div>
+      <div class="field col-6 md:col-2 lg:col-3 xl:col-3">
+        <div class="label-form">Admin</div><br />
+        <p-toggleswitch formControlName="isAdmin"></p-toggleswitch>
+      </div>
+      <div class="field col-6 md:col-2 lg:col-3 xl:col-3">
+        <div class="label-form">Estado</div><br />
+        <p-toggleswitch formControlName="estado"></p-toggleswitch>
+      </div>
+      <div class="field col-12 md:col-12 lg:col-6 xl:col-6">
+        <p-select [options]="regionales()" formControlName="regionalId" placeholder="Seleccione una regional"
+          (onChange)="onChangeRegional()" [filter]="true" optionLabel="descripcion" optionValue="id">
+        </p-select>
+      </div>
+      <div class="field col-12 md:col-12 lg:col-6 xl:col-6">
+        <p-select [options]="centrosMedicos()" formControlName="centroMedicoId"
+          placeholder="Seleccione un centro médico" (onChange)="onChangeCentroMedico()" [filter]="true"
+          optionLabel="descripcion" optionValue="id">
+        </p-select>
+      </div>
+    </div>
+  </form>
+  <div class="grid">
+    <!-- Tabla Izquierda -->
+    <div class="col-5">
+      @if (filteredConsultoriosLeft().length>0) {
+      <input type="text" pInputText placeholder="Buscar" [(ngModel)]="searchBusqueda"
+        (keyup.enter)="filterConsultorios()" class="w-full" />
+      }
+      <p-table #dt1 [value]=" filteredConsultoriosLeft()" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+        selectionMode="multiple" [(selection)]="selectedConsultoriosLeft" scrollHeight="calc(100vh - 500px)">
+        <ng-template pTemplate="header">
+          <!-- Aquí podrías agregar encabezados si es necesario -->
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr [pSelectableRow]="item">
+            <td class="text-center">{{item?.descripcion}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <!-- Botones para mover -->
+    <div class="col-1 text-center">
+      @if (filteredConsultoriosLeft().length>0) {
+      <button pButton type="button" icon="pi pi-angle-right" (click)="moveToRight()"
+        [disabled]="selectedConsultoriosLeft.length === 0"></button>
+      } @if (filteredConsultoriosRightCopy.length>0) {
+      <button pButton type="button" icon="pi pi-angle-left" (click)="moveToLeft()"
+        [disabled]="selectedConsultoriosRight.length === 0"></button>
+      }
+    </div>
+    <!-- Tabla Derecha -->
+    <div class="col-6">
+      @if (filteredConsultoriosRightCopy.length>0) {
+      <input type="text" pInputText placeholder="Buscar" [(ngModel)]="searchBusquedaRight"
+        (keyup.enter)="filterConsultoriosRight()" class="w-full" />
+      }
+      <p-table #dt2 [value]="filteredConsultoriosRight" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+        selectionMode="multiple" [(selection)]="selectedConsultoriosRight" scrollHeight="calc(100vh - 500px)">
+        <ng-template pTemplate="header">
+          <th class="text-center" style="width: 55%">Centro Medico</th>
+          <th class="text-center" style="width: 45%">Consultorio</th>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr [pSelectableRow]="item">
+            <td class="text-center">{{item?.centroMedico?.descripcion}}</td>
+            <td class="text-center">{{item?.descripcion}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <br />
+    <div class="grid w-full">
+      <div class="col-12 md:col-6 lg:col-8 xl:col-8"></div>
+      <div class="col-12 md:col-6 lg:col-4 xl:col-4">
+        <button pButton type="button" class="p-button-success w-full" icon="pi pi-save" label="Guardar"
+          [disabled]="!dataForm.valid" (click)="saveData()"></button>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>

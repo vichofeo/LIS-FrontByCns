@@ -1,0 +1,23 @@
+<div
+  class="layout-menu-wrapper"
+  [ngClass]="{'layout-menu-wrapper-active': layout.menuActive}"
+  (click)="onMenuClick()">
+  <div class="layout-menu-container">
+    <ul class="layout-menu">
+      <li class="search-item">
+        <div>
+          <input
+            type="text"
+            pInputText
+            placeholder="Buscar"
+            [(ngModel)]="buscar"
+            (keyup.enter)="onKey()" />
+          <span class="search1 fa fa-search"></span>
+        </div>
+      </li>
+      @for (item of model; track item.id; let i = $index) {
+      <li app-menuitem [item]="item" [index]="i" [root]="true"></li>
+      }
+    </ul>
+  </div>
+</div>

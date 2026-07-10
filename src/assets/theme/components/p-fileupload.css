@@ -1,0 +1,52 @@
+.p-fileupload .p-fileupload-buttonbar {
+  background: #f8f9fa;
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  color: var(--text-color);
+  border-bottom: 0 none;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.p-fileupload .p-fileupload-buttonbar .p-button {
+  margin-right: 0.5rem;
+}
+
+.p-fileupload .p-fileupload-buttonbar .p-button.p-fileupload-choose.p-focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #63ffed;
+}
+
+.p-fileupload .p-fileupload-content {
+  background: #ffffff;
+  padding: 2rem 1rem;
+  border: 1px solid #dee2e6;
+  color: var(--text-color);
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.p-fileupload .p-progressbar {
+  height: 0.25rem;
+}
+
+.p-fileupload .p-fileupload-row > div {
+  padding: 1rem 1rem;
+}
+
+.p-fileupload.p-fileupload-advanced .p-message {
+  margin-top: 0;
+}
+
+.p-fileupload-choose:not(.p-disabled):hover {
+  background: #006d60;
+  color: #ffffff;
+  border-color: #006d60;
+}
+
+.p-fileupload-choose:not(.p-disabled):active {
+  background: #006156;
+  color: #ffffff;
+  border-color: #006156;
+}

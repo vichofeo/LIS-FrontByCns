@@ -1,0 +1,108 @@
+<div class="layout-wrapper"
+  [ngClass]="{'layout-menu-horizontal': menuMode === 'horizontal',
+                                        'layout-menu-popup': menuMode === 'popup',
+                                        'layout-menu-overlay': menuMode === 'overlay',
+                                        'layout-menu-static': menuMode === 'static',
+                                        'layout-menu-static-inactive': (menuMode === 'static' && menuActive === false)}"
+  (click)="onLayoutClick()">
+  <app-header></app-header>
+  <div class="layout-main">
+    <div class="layout-content">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="layout-config" [ngClass]="{'layout-config-active': configActive}" (click)="onConfigClick()">
+      <h3>Notificaciones</h3>
+      <hr />
+      <ol class="gradient-list">
+        @for (item of notifications; track item) {
+        <li [class.back-red]="item.mes < 4" [class.back-yellow]="item.mes > 3">
+          <table>
+            <tr>
+              <td>{{ item.codigoArticulo }}</td>
+            </tr>
+            <tr>
+              <td>{{ item.fechaLote | date:'dd/MM/yyyy' }}</td>
+            </tr>
+            <tr>
+              <td>Lote: {{ item.numeroLote }}</td>
+            </tr>
+            <tr>
+              <td>Saldo: {{ item.saldo }}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+        </li>
+        }
+      </ol>
+    </div>
+    <div class="layout-config" [ngClass]="{'layout-config-active': configManualActive}" (click)="onManualClick()">
+      <h3>Ayuda</h3>
+      <hr />
+      <ol class="gradient-list">
+        <li>
+          <div class="cns-title">Citas Médicas</div>
+          <a href="https://cloud.cns.gob.bo/s/ZE3Co2mHHYDKSJY" class="cns-manual" target="_blank"><i
+              class="fa fa-book"></i>&nbsp;Programación</a><br />
+          <a href="https://cloud.cns.gob.bo/s/76qiWwXx9e2Epm7" class="cns-manual" target="_blank"><i
+              class="fa fa-book"></i>&nbsp;Atención</a>
+          <div class="cns-contacto">
+            <span class="cns-sub-title">Contactos</span><br />
+            <span>Ing. Ximena Quispe</span><br />
+            <a href="https://web.whatsapp.com/send/?phone=59172523181" target="_blank" title="72523181"><i
+                class="fa fa-whatsapp cns-ico"></i></a>
+            &nbsp;<a href="mailto:ximena.quispe@cns.gob.bo" target="_blank" title="ximena.quispe@cns.gob.bo"><i
+                class="fa fa-envelope-o cns-ico"></i></a>
+            &nbsp;<a href="skype:ximena.quispe.cns.gob.bo?chat" target="_blank" title="ximena.quispe.cns.gob.bo"><i
+                class="fa fa-skype cns-ico"></i></a>
+          </div>
+        </li>
+        <li>
+          <div class="cns-title">Contabilidad</div>
+          <a href="https://cloud.cns.gob.bo/s/Qest9wDrCSQzZaR" class="cns-manual" target="_blank"><i
+              class="fa fa-book"></i>&nbsp;Facturación electrónica</a><br />
+          <div class="cns-contacto">
+            <span class="cns-sub-title">Contactos</span><br />
+            <span>Lic. Jose Mamani</span><br />
+            <a href="https://web.whatsapp.com/send/?phone=59172507426" target="_blank" title="72507426"><i
+                class="fa fa-whatsapp cns-ico"></i></a>
+            &nbsp;<a href="mailto:jose.mamani@cns.gob.bo" target="_blank" title="jose.mamani@cns.gob.bo"><i
+                class="fa fa-envelope-o cns-ico"></i></a>
+            &nbsp;<a href="skype:jose.mamani.cns.gob.bo?chat" target="_blank" title="jose.mamani.cns.gob.bo"><i
+                class="fa fa-skype cns-ico"></i></a>
+          </div>
+        </li>
+      </ol>
+    </div>
+    <div class="layout-config" [ngClass]="{'layout-config-active': configActualizaciones}"
+      (click)="onActualizacionesClick()">
+      <h3>Actualizaciones</h3>
+      <hr>
+      <div class="cards-container">
+        <div class="card car-version">
+          <p class="titulo-app">PGRSALUD</p>
+          <div class="version-info">
+            <span class="pi pi-history"></span>
+            <span>{{ version }} - {{ deployDate }}</span>
+          </div>
+        </div>
+        <div class="card car-version">
+          <p class="titulo-app">CITAS MÉDICAS</p>
+          <div class="version-info">
+            <span class="pi pi-history"></span>
+            <span>{{ versiones()['citasMedicas']?.version }} - {{ versiones()['citasMedicas']?.buildDate }}</span>
+          </div>
+        </div>
+        <div class="card car-version">
+          <p class="titulo-app">VIGENCIA</p>
+          <div class="version-info">
+            <span class="pi pi-history"></span>
+            <span>{{ versiones()['vigencia']?.version }} - {{ versiones()['vigencia']?.buildDate }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

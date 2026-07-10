@@ -1,0 +1,62 @@
+.p-select-overlay,
+.p-overlay {
+  background: #ffffff !important;
+  color: var(--p-text-color) !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  box-shadow:
+    0 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.p-select-header {
+  padding: 0.5rem 1rem !important;
+  background: #f8f9fa !important;
+  color: var(--p-text-color) !important;
+  border-radius: 4px 4px 0 0 !important;
+}
+
+.p-select-filter {
+  padding-right: 1.5rem !important;
+}
+
+.p-select-filter-icon {
+  right: 0.5rem !important;
+  color: var(--p-text-muted-color) !important;
+}
+
+.p-select-list {
+  padding: 0.5rem 0 !important;
+}
+
+.p-select-option {
+  margin: 0 !important;
+  padding: 0.5rem 1rem !important;
+  background: transparent !important;
+  color: var(--p-text-color) !important;
+  transition: background-color 0.2s !important;
+}
+
+.p-select-option.p-select-option-selected {
+  background: var(--primary-color) !important;
+  color: #ffffff !important;
+}
+
+.p-select-option:not(.p-disabled):not(.p-select-option-selected):hover {
+  background: #e9ecef !important;
+}
+
+.p-select-empty-message {
+  padding: 0.5rem 1rem !important;
+}
+
+.p-select-option-group {
+  padding: 0.75rem 1rem !important;
+  font-weight: 600 !important;
+  background: #ffffff !important;
+}
+
+.p-select.p-invalid {
+  border-color: #f44336 !important;
+}

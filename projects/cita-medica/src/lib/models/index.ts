@@ -1,0 +1,5 @@
+export * from './Inhabilitacion'
+export * from './ConsultorioHorario'
+export * from './Horario'
+export * from './Usuario'
+export * from './Medico'

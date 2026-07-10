@@ -1,0 +1,11 @@
+.p-link {
+  font-size: 1rem;
+  font-family: 'Lato', 'Helvetica Neue', sans-serif;
+  border-radius: 4px;
+}
+
+.p-link:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #63ffed;
+}

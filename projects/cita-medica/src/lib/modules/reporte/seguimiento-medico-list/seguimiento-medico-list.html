@@ -1,0 +1,186 @@
+<div class="grid">
+  <div class="col text-center">
+    <span class="feature-title">Seguimiento de Atenciones Medicas</span>
+  </div>
+</div>
+<div class="grid stickyMenu">
+  <div class="col">
+    <p-menubar [model]="menuTable">
+      <div>
+        <input
+          type="text"
+          pInputText
+          placeholder="Buscar"
+          [(ngModel)]="search"
+          (keyup.enter)="
+            getData(1, 10)
+          " />
+      </div>
+    </p-menubar>
+  </div>
+</div>
+<div class="content-section implementation form-card">
+  <div class="grid">
+    <div class="col-12 md:col-3"></div>
+    <div class="col-12 md:col-6">
+      <div class="grid">
+        <div class="lblFilter col-5"><span>Regional/Distrital:</span></div>
+        <div class="inputFilter col-7">
+          <span>{{ regional()?.descripcion }}</span>
+        </div>
+        <div class="lblFilter col-5"><span>Centro Médico:</span></div>
+        <div class="inputFilter col-7">
+          <p-select
+            [options]="centrosMedicos()"
+            [(ngModel)]="centroMedicoSelected"
+            placeholder="Seleccione un centro médico"
+            (onChange)="onChangeCentroMedico()"
+            [filter]="true"
+            optionLabel="descripcion"
+            optionValue="id">
+          </p-select>
+        </div>
+        <div class="lblFilter col-5"><span>Consultorio:</span></div>
+        <div class="inputFilter col-7">
+          <p-select
+            [options]="consultorios()"
+            [(ngModel)]="consultorioSelected"
+            placeholder="Seleccione un consultorio"
+            (onChange)="onChangeConsultorio()"
+            [filter]="true"
+            optionLabel="descripcion"
+            optionValue="id">
+          </p-select>
+        </div>
+        @if (consultorioSelected > 0) {
+        <div class="lblFilter col-5"><span>Médico:</span></div>
+        <div class="inputFilter col-7">
+          <p-select
+            [options]="medicos()"
+            [(ngModel)]="medicoSelected"
+            placeholder="Seleccione un médico"
+            (onChange)="onChangeMedico()"
+            [filter]="true"
+            optionLabel="nombres"
+            optionValue="id">
+          </p-select>
+        </div>
+        }
+        <div class="lblFilter col-5"><span>Fecha:</span></div>
+        <div class="inputFilter col-7">
+          <p-datePicker
+            [(ngModel)]="dateIni"
+            selectionMode="single"
+            dateFormat="dd/mm/yy"
+            [numberOfMonths]="1"
+            (onSelect)="onSelectCalendar()"
+            (onClose)="onCloseCalendar()">
+          </p-datePicker>
+          a
+          <p-datePicker
+            [(ngModel)]="dateFin"
+            selectionMode="single"
+            dateFormat="dd/mm/yy"
+            [numberOfMonths]="1"
+            (onSelect)="onSelectCalendar()"
+            (onClose)="onCloseCalendar()">
+          </p-datePicker>
+        </div>
+        @if (consultorioSelected > 0 && medicoSelected) {
+        <div class="lblFilter col-5"><span>Horarios de Atención:</span></div>
+        <div class="inputFilter col-7">
+          <div class="div-border p-1">
+            @for (hor of horarios(); track $index) {
+            <div>
+              <span>{{ hor.descripcion }}</span>
+              <div class="dias-semana compacto">
+                @for (dia of diasSemana; track $index; let i = $index) {
+                <div class="dia">
+                  <span>{{ dia }}</span>
+                  <input type="checkbox" [checked]="esDiaMarcado(hor?.diasAtencion, i)" disabled />
+                </div>
+                }
+              </div>
+            </div>
+            }
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+    <div class="col-12 md:col-3"></div>
+  </div>
+  <div class="grid p-mt-1">
+    <div class="col-12">
+      <div class="card">
+        <p-table
+          #grid
+          [value]="items()"
+          [(selection)]="selectedItem"
+          selectionMode="single"
+          (onRowSelect)="onRowSelect($event)"
+          (onRowUnselect)="onRowUnselect($event)"
+          [loading]="loadingGrid"
+          class="p-datatable-striped responsive-table">
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="text-center">Consultorio</th>
+              <th class="text-center">Médico</th>
+              <th class="text-center">Horario Atención</th>
+              <th class="text-center">Total Asignaciones</th>
+              <th class="text-center">Atendidos</th>
+              <th class="text-center">Inasistencias</th>
+              <th class="text-center">Pendientes</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-item>
+            <tr [pSelectableRow]="item">
+              <td>
+                <span class="p-column-title"><b>Consultorio</b></span
+                >{{getConsultorioDescripcion(item.consultorioId)?.descripcion}}
+              </td>
+              <td class="text-center">
+                <span class="p-column-title"><b>Médico</b></span
+                >{{ item.nombres }}
+              </td>
+              <td class="text-center">
+                <span class="p-column-title"><b>Horario Atención</b></span
+                >{{ item.horarioAtencion }}
+              </td>
+              <td class="text-center">
+                <span class="p-column-title"><b>Total Asignaciones</b></span
+                >{{ item.totalAsignaciones }}
+              </td>
+              <td class="text-center">
+                <span class="p-column-title"><b>Atendidos</b></span
+                >{{ item.atendidos }}
+              </td>
+              <td class="text-center">
+                <span class="p-column-title"><b>Inasistencias</b></span
+                >{{ item.inasistencias }}
+              </td>
+              <td class="text-center">
+                <span class="p-column-title"><b>Pendientes</b></span
+                >{{ item.noAtendidos }}
+              </td>
+              <span class="p-column-title">
+                <div class="rowspan"></div>
+              </span>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+            <p-paginator
+              [rows]="rows"
+              [totalRecords]="total"
+              (onPageChange)="paginate($event)"></p-paginator>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>
+<p-confirmDialog [style]="{ width: '50vw' }" [baseZIndex]="10000"></p-confirmDialog>
+<p-drawer [(visible)]="fullSideBar" [fullScreen]="true" [baseZIndex]="10000">
+  <h4>&nbsp;</h4>
+  <cns-pdf-viewer [pdf]="pdf" height="85vh" (onSelectColor)="changeColor($event)"></cns-pdf-viewer>
+</p-drawer>

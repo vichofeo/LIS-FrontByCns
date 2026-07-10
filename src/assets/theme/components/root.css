@@ -1,0 +1,18 @@
+:root {
+  --surface-a: #ffffff;
+  --surface-b: #f8f9fa;
+  --surface-c: #e9ecef;
+  --surface-d: #dee2e6;
+  --surface-e: #ffffff;
+  --surface-f: #ffffff;
+  --text-color: #495057;
+  --text-color-secondary: #6c757d;
+  --primary-color: #00796b;
+  --primary-color-text: #ffffff;
+  --font-family: Lato, Helvetica Neue, sans-serif;
+  --icon-color: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}

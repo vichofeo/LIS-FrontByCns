@@ -1,0 +1,173 @@
+.p-tree {
+  border: 1px solid #dee2e6;
+  background: #ffffff;
+  color: var(--text-color);
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.p-tree .p-tree-container .p-treenode {
+  padding: 0.143rem;
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content {
+  border-radius: 4px;
+  transition: box-shadow 0.2s;
+  padding: 0.5rem;
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler {
+  margin-right: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  color: var(--text-color-secondary);
+  border: 0 none;
+  background: transparent;
+  border-radius: 50%;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler:enabled:hover {
+  color: var(--text-color);
+  border-color: transparent;
+  background: #e9ecef;
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #63ffed;
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content .p-treenode-icon {
+  margin-right: 0.5rem;
+  color: var(--text-color-secondary);
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content .p-checkbox {
+  margin-right: 0.5rem;
+}
+
+.p-tree
+  .p-tree-container
+  .p-treenode
+  .p-treenode-content
+  .p-checkbox
+  .p-indeterminate
+  .p-checkbox-icon {
+  color: var(--text-color);
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #63ffed;
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight {
+  background: var(--primary-color);
+  color: #ffffff;
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight .p-tree-toggler,
+.p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight .p-treenode-icon {
+  color: #ffffff;
+}
+
+.p-tree
+  .p-tree-container
+  .p-treenode
+  .p-treenode-content.p-treenode-selectable:not(.p-highlight):hover {
+  background: #e9ecef;
+  color: var(--text-color);
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content.p-treenode-dragover {
+  background: #e9ecef;
+  color: var(--text-color);
+}
+
+.p-tree .p-tree-filter-container {
+  margin-bottom: 0.5rem;
+}
+
+.p-tree .p-tree-filter-container .p-tree-filter {
+  width: 100%;
+  padding-right: 1.5rem;
+}
+
+.p-tree .p-tree-filter-container .p-tree-filter-icon {
+  right: 0.5rem;
+  color: var(--text-color-secondary);
+}
+
+.p-tree .p-treenode-children {
+  padding: 0 0 0 1rem;
+}
+
+.p-tree .p-tree-loading-icon {
+  font-size: 2rem;
+}
+
+.p-tree .p-treenode-droppoint.p-treenode-droppoint-active {
+  background-color: #006156;
+}
+
+.p-tree.p-tree-horizontal .p-treenode .p-treenode-content {
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+  background-color: #ffffff;
+  color: var(--text-color);
+  padding: 0.5rem;
+  transition: box-shadow 0.2s;
+}
+
+.p-tree.p-tree-horizontal .p-treenode .p-treenode-content.p-highlight {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.p-tree.p-tree-horizontal .p-treenode .p-treenode-content.p-highlight .p-treenode-icon {
+  color: #ffffff;
+}
+
+.p-tree.p-tree-horizontal .p-treenode .p-treenode-content .p-tree-toggler {
+  margin-right: 0.5rem;
+}
+
+.p-tree.p-tree-horizontal .p-treenode .p-treenode-content .p-treenode-icon {
+  color: var(--text-color-secondary);
+  margin-right: 0.5rem;
+}
+
+.p-tree.p-tree-horizontal .p-treenode .p-treenode-content .p-checkbox {
+  margin-right: 0.5rem;
+}
+
+.p-tree.p-tree-horizontal .p-treenode .p-treenode-content .p-checkbox .p-checkbox-icon {
+  color: var(--primary-color);
+}
+
+.p-tree.p-tree-horizontal
+  .p-treenode
+  .p-treenode-content
+  .p-treenode-label:not(.p-highlight):hover {
+  background-color: inherit;
+  color: inherit;
+}
+
+.p-tree.p-tree-horizontal
+  .p-treenode
+  .p-treenode-content.p-treenode-selectable:not(.p-highlight):hover {
+  background: #e9ecef;
+  color: var(--text-color);
+}
+
+.p-tree.p-tree-horizontal .p-treenode .p-treenode-content:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #63ffed;
+}

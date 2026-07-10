@@ -1,0 +1,149 @@
+.fc .fc-view-container th {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  color: var(--text-color);
+}
+
+.fc .fc-view-container td.fc-widget-content {
+  background: #ffffff;
+  border: 1px solid #dee2e6;
+  color: var(--text-color);
+}
+
+.fc .fc-view-container td.fc-head-container {
+  border: 1px solid #dee2e6;
+}
+
+.fc .fc-view-container .fc-row {
+  border-right: 1px solid #dee2e6;
+}
+
+.fc .fc-view-container .fc-event {
+  background: #006d60;
+  border: 1px solid #006d60;
+  color: #ffffff;
+}
+
+.fc .fc-view-container .fc-divider {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+}
+
+.fc .fc-toolbar .fc-button {
+  color: #ffffff;
+  background: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  font-size: 1rem;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.fc .fc-toolbar .fc-button:enabled:hover {
+  background: #006d60;
+  color: #ffffff;
+  border-color: #006d60;
+}
+
+.fc .fc-toolbar .fc-button:enabled:active {
+  background: #006156;
+  color: #ffffff;
+  border-color: #006156;
+}
+
+.fc .fc-toolbar .fc-button:enabled:active:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #63ffed;
+}
+
+.fc .fc-toolbar .fc-button .fc-icon-chevron-left {
+  font-family: 'PrimeIcons' !important;
+  text-indent: 0;
+  font-size: 1rem;
+}
+
+.fc .fc-toolbar .fc-button .fc-icon-chevron-left:before {
+  content: '';
+}
+
+.fc .fc-toolbar .fc-button .fc-icon-chevron-right {
+  font-family: 'PrimeIcons' !important;
+  text-indent: 0;
+  font-size: 1rem;
+}
+
+.fc .fc-toolbar .fc-button .fc-icon-chevron-right:before {
+  content: '';
+}
+
+.fc .fc-toolbar .fc-button:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #63ffed;
+}
+
+.fc .fc-toolbar .fc-button.fc-dayGridMonth-button,
+.fc .fc-toolbar .fc-button.fc-timeGridWeek-button,
+.fc .fc-toolbar .fc-button.fc-timeGridDay-button {
+  background: #ffffff;
+  border: 1px solid #ced4da;
+  color: var(--text-color);
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.fc .fc-toolbar .fc-button.fc-dayGridMonth-button:hover,
+.fc .fc-toolbar .fc-button.fc-timeGridWeek-button:hover,
+.fc .fc-toolbar .fc-button.fc-timeGridDay-button:hover {
+  background: #e9ecef;
+  border-color: #ced4da;
+  color: var(--text-color);
+}
+
+.fc .fc-toolbar .fc-button.fc-dayGridMonth-button.fc-button-active,
+.fc .fc-toolbar .fc-button.fc-timeGridWeek-button.fc-button-active,
+.fc .fc-toolbar .fc-button.fc-timeGridDay-button.fc-button-active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.fc .fc-toolbar .fc-button.fc-dayGridMonth-button.fc-button-active:hover,
+.fc .fc-toolbar .fc-button.fc-timeGridWeek-button.fc-button-active:hover,
+.fc .fc-toolbar .fc-button.fc-timeGridDay-button.fc-button-active:hover {
+  background: #006d60;
+  border-color: #006d60;
+  color: #ffffff;
+}
+
+.fc .fc-toolbar .fc-button.fc-dayGridMonth-button:focus,
+.fc .fc-toolbar .fc-button.fc-timeGridWeek-button:focus,
+.fc .fc-toolbar .fc-button.fc-timeGridDay-button:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #63ffed;
+  z-index: 1;
+}
+
+.fc .fc-toolbar .fc-button-group .fc-button {
+  border-radius: 0;
+}
+
+.fc .fc-toolbar .fc-button-group .fc-button:first-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.fc .fc-toolbar .fc-button-group .fc-button:last-child {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}

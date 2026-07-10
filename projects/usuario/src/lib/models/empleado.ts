@@ -1,0 +1,23 @@
+export interface Empleado {
+  matricula: string,
+  regionalId: string,
+  paterno: string,
+  materno: string,
+  nombres: string,
+  documentoIdentidad: string,
+  extencion: string,
+  item: string,
+  regionalAll: string,
+  tipo: number,
+  mes: number,
+  gestion: number,
+  entregaBoletaId: number,
+  observacion: string,
+  responsable: string,
+  fechaEntrega: string,
+  usuarioCreacion: string,
+  estado: number,
+  tipoDesc: string,
+  descripcionCobroPor: string,
+  estadoRegistro: string
+}

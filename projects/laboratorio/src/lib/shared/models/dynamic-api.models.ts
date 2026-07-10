@@ -1,0 +1,45 @@
+export interface DynamicFieldCombo {
+  s01: { value: unknown }
+  selected: { value: string; text: string }
+  items: DynamicSelectItem[]
+  dependency: boolean
+}
+
+export interface DynamicSelectItem {
+  value: string
+  text: string
+}
+
+export type DynamicFieldValue = string | number | boolean | null | DynamicFieldCombo
+
+export interface DynamicFormValues {
+  [field: string]: DynamicFieldValue
+}
+
+export interface DynamicFormCampos {
+  [field: string]: [string, boolean, boolean, string, number?]
+}
+
+export interface DynamicListItem {
+  [field: string]: unknown
+  idx: string
+  linked?: string
+}
+
+export interface DynamicListCampos {
+  value: string
+  text: string
+}
+
+export interface DynamicEntityData {
+  campos: DynamicFormCampos | DynamicListCampos[]
+  valores: DynamicFormValues | DynamicListItem[]
+  exito?: boolean
+  linked?: string
+}
+
+export interface DynamicResponse {
+  ok: boolean
+  data: Record<string, DynamicEntityData>
+  message: string
+}

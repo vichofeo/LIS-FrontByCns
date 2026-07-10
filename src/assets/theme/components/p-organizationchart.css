@@ -1,0 +1,47 @@
+.p-organizationchart
+  .p-organizationchart-node-content.p-organizationchart-selectable-node:not(.p-highlight):hover {
+  background: #e9ecef;
+  color: var(--text-color);
+}
+
+.p-organizationchart .p-organizationchart-node-content.p-highlight {
+  background: var(--primary-color);
+  color: #ffffff;
+}
+
+.p-organizationchart .p-organizationchart-node-content.p-highlight .p-node-toggler i {
+  color: black;
+}
+
+.p-organizationchart .p-organizationchart-line-down {
+  background: #dee2e6;
+}
+
+.p-organizationchart .p-organizationchart-line-left {
+  border-right: 1px solid #dee2e6;
+  border-color: #dee2e6;
+}
+
+.p-organizationchart .p-organizationchart-line-top {
+  border-top: 1px solid #dee2e6;
+  border-color: #dee2e6;
+}
+
+.p-organizationchart .p-organizationchart-node-content {
+  border: 1px solid #dee2e6;
+  background: #ffffff;
+  color: var(--text-color);
+  padding: 1rem;
+}
+
+.p-organizationchart .p-organizationchart-node-content .p-node-toggler {
+  background: inherit;
+  color: inherit;
+  border-radius: 50%;
+}
+
+.p-organizationchart .p-organizationchart-node-content .p-node-toggler:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #63ffed;
+}

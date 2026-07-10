@@ -1,0 +1,47 @@
+.p-chips .p-chips-multiple-container {
+  padding: 0.25rem 0.5rem;
+}
+
+.p-chips .p-chips-multiple-container:not(.p-disabled):hover {
+  border-color: var(--primary-color);
+}
+
+.p-chips .p-chips-multiple-container:not(.p-disabled).p-focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #63ffed;
+  border-color: var(--primary-color);
+}
+
+.p-chips .p-chips-multiple-container .p-chips-token {
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.5rem;
+  background: var(--primary-color);
+  color: #ffffff;
+  border-radius: 4px;
+}
+
+.p-chips .p-chips-multiple-container .p-chips-token .p-chips-token-icon {
+  margin-left: 0.5rem;
+}
+
+.p-chips .p-chips-multiple-container .p-chips-input-token {
+  padding: 0.25rem 0;
+}
+
+.p-chips .p-chips-multiple-container .p-chips-input-token input {
+  font-family: 'Lato', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+  color: var(--text-color);
+  padding: 0;
+  margin: 0;
+}
+
+.p-chips.p-error > .p-inputtext,
+.p-chips.p-invalid > .p-inputtext {
+  border-color: #f44336;
+}
+
+p-chips.ng-dirty.ng-invalid > .p-chips > .p-inputtext {
+  border-color: #f44336;
+}

@@ -1,0 +1,23 @@
+input[type='text'] {
+  background-color: #f5f8f9;
+  border: 1px solid #ced4da;
+  padding: 6px 28px 6px 12px;
+  width: 98%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-transition: border-color 0.3s;
+  -o-transition: border-color 0.3s;
+  -webkit-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+  margin-left: 2px;
+  border-radius: 3px;
+}
+
+.search1 {
+  position: absolute;
+  color: #647585;
+  top: 20px;
+  right: 12px;
+  font-size: 17px;
+}

@@ -38,6 +38,18 @@ export interface DynamicEntityData {
   linked?: string
 }
 
+export interface DynamicGroup {
+  model: string
+  label: string
+  icon: string
+}
+
+export interface DynamicAgrupadoResponse {
+  ok: boolean
+  data: DynamicGroup[]
+  message: string
+}
+
 export interface DynamicResponse {
   ok: boolean
   data: Record<string, DynamicEntityData>

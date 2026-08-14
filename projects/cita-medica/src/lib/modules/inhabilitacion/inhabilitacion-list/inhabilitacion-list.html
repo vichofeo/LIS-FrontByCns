@@ -2,79 +2,52 @@
   <div class="col-12 text-center">
     <span class="feature-title">Inhabilitaciones</span>
     <div class="grid">
-      @if (regionales.length <= 1) {
-      <div class="col-6 text-right">
+      @if (regionales.length <= 1) { <div class="col-6 text-right">
         <span>Regional: </span>
         <span style="font-weight: bold">{{regional()?.descripcion??''}}</span>
-      </div>
-      } @if (regionales.length > 1) {
-      <div class="col-6">
-        <div class="grid">
-          <div class="col-6"></div>
-          <div class="col-6">
-            <p-select
-              [options]="regionales"
-              [(ngModel)]="regionalSelected"
-              placeholder="Seleccione una regional"
-              (onChange)="onChangeRegional()"
-              [filter]="true"
-              optionLabel="descripcion"
-              optionValue="id">
-            </p-select>
-          </div>
+    </div>
+    } @if (regionales.length > 1) {
+    <div class="col-6">
+      <div class="grid">
+        <div class="col-6"></div>
+        <div class="col-6">
+          <p-select [options]="regionales" [(ngModel)]="regionalSelected" placeholder="Seleccione una regional"
+            (onChange)="onChangeRegional()" [filter]="true" optionLabel="descripcion" optionValue="id">
+          </p-select>
         </div>
       </div>
-      } @if (centrosMedicos.length <= 1) {
-      <div class="col-6 text-left">
-        <span style="padding-left: 10px">Centro Médico: </span>
-        <span style="font-weight: bold">{{centroMedico()?.descripcion}}</span>
-      </div>
-      } @if (centrosMedicos.length > 1) {
+    </div>
+    } @if (centrosMedicos.length <= 1) { <div class="col-6 text-left">
+      <span style="padding-left: 10px">Centro Médico: </span>
+      <span style="font-weight: bold">{{centroMedico()?.descripcion}}</span>
+  </div>
+  } @if (centrosMedicos.length > 1) {
+  <div class="col-6">
+    <div class="grid">
       <div class="col-6">
-        <div class="grid">
-          <div class="col-6">
-            <p-select
-              [options]="centrosMedicos"
-              [(ngModel)]="centroMedicoSelected"
-              placeholder="Seleccione un centro médico"
-              (onChange)="onChangeCentroMedico()"
-              [filter]="true"
-              optionLabel="descripcion"
-              optionValue="id">
-            </p-select>
-          </div>
-          <div class="col-6"></div>
-        </div>
+        <p-select [options]="centrosMedicos" [(ngModel)]="centroMedicoSelected"
+          placeholder="Seleccione un centro médico" (onChange)="onChangeCentroMedico()" [filter]="true"
+          optionLabel="descripcion" optionValue="id">
+        </p-select>
       </div>
-      }
+      <div class="col-6"></div>
     </div>
   </div>
+  }
+</div>
+</div>
 </div>
 <div class="grid p-mt-1">
   <div class="col-12">
     <div class="card">
-      <p-table
-        #grid
-        [value]="items()"
-        [(selection)]="selectedItem"
-        selectionMode="single"
-        (onRowSelect)="onRowSelect()"
-        (onRowUnselect)="onRowUnselect($event)"
-        [loading]="loadingGrid"
-        class="p-datatable-striped responsive-table"
+      <p-table #grid [value]="items()" [(selection)]="selectedItem" selectionMode="single" (onRowSelect)="onRowSelect()"
+        (onRowUnselect)="onRowUnselect($event)" [loading]="loadingGrid" class="p-datatable-striped responsive-table"
         dataKey="id">
         <ng-template pTemplate="caption">
           <p-menubar [model]="menuTable">
             <div>
-              <input
-                type="text"
-                id="search"
-                name="search"
-                pInputText
-                placeholder="Buscar"
-                [(ngModel)]="search"
-                (keyup.enter)="getData(1, 10)"
-                autocomplete="off" />
+              <input type="text" id="search" name="search" pInputText placeholder="Buscar" [(ngModel)]="search"
+                (keyup.enter)="getData(1, 10)" autocomplete="off" />
             </div>
           </p-menubar>
         </ng-template>
@@ -136,10 +109,7 @@
           </tr>
         </ng-template>
         <ng-template pTemplate="summary">
-          <p-paginator
-            [rows]="rows"
-            [totalRecords]="total"
-            (onPageChange)="paginate($event)"></p-paginator>
+          <p-paginator [rows]="rows" [totalRecords]="total" (onPageChange)="paginate($event)"></p-paginator>
         </ng-template>
       </p-table>
     </div>

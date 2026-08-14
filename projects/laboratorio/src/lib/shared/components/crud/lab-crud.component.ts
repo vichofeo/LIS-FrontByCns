@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild, computed, inject, signal } from '@
 import { MessageService } from 'primeng/api'
 import { ButtonModule } from 'primeng/button'
 import { CardModule } from 'primeng/card'
+import { ConfirmDialogModule } from 'primeng/confirmdialog'
 import { DialogModule } from 'primeng/dialog'
 import { ProgressSpinnerModule } from 'primeng/progressspinner'
 import { ToastModule } from 'primeng/toast'
@@ -9,8 +10,9 @@ import { firstValueFrom } from 'rxjs'
 
 import { DynamicEntityData, DynamicFormCampos } from '../../models/dynamic-api.models'
 import { DynamicApiService } from '../../services/dynamic-api.service'
+import { toDynamicFormSchema } from '../../utils/dynamic-form-schema.util'
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component'
-import { DynamicFieldConfig, DynamicFormSchema, FieldTypeCode } from '../dynamic-form/dynamic-form.models'
+import { DynamicFormSchema } from '../dynamic-form/dynamic-form.models'
 import { TableCheckComponent } from '../table/table-check.component'
 import { TableColumn } from '../table/table-check.models'
 
@@ -20,15 +22,15 @@ interface CamposItem { value: string; text: string }
   selector: 'lab-crud',
   standalone: true,
   providers: [MessageService],
-  imports: [CardModule, ButtonModule, DialogModule, ProgressSpinnerModule, ToastModule, TableCheckComponent, DynamicFormComponent],
+  imports: [CardModule, ButtonModule, ConfirmDialogModule, DialogModule, ProgressSpinnerModule, ToastModule, TableCheckComponent, DynamicFormComponent],
   template: `
     <p-toast />
+    <p-confirmDialog />
 
     <p-card>
       <ng-template pTemplate="title">
         <div class="flex justify-content-between align-items-center">
-          <span class="font-bold text-lg">{{ tituloCentral }}</span>
-          <button pButton label="Nuevo registro" icon="pi pi-plus" class="p-button-sm" (click)="nuevo()"></button>
+          <span class="font-bold text-lg">{{ tituloCentral }}</span>          
         </div>
       </ng-template>
       <ng-template pTemplate="content">
@@ -40,23 +42,21 @@ interface CamposItem { value: string; text: string }
           <div class="text-center text-500 p-4">-Sin Dato-</div>
         } @else {
           <lab-table-check
-          [itemsPerPage]="10"
-          [withDel]="true"
-          [withEdit]="true"
-          [showSelect]="false"
-
-            [columns]="columns()"
-            [data]="items()"
-            [columns]="columns()"
-            [data]="items()"
-            
-            
-            
+            [itemsPerPage]="10"
+            [showSelect]="true"
             [singleSelect]="true"
+            [withDel]="true"
+            [withEdit]="true"
+            [columns]="columns()"
+            [data]="items()"
             [globalFilterFields]="filterFields()"
             (editItem)="onEdit($event)"
             (deleteItem)="onDelete($event)"
-          />
+          >
+            <div labTableCaption class="flex justify-content-between align-items-center">
+              <button pButton label="Nuevo registro" icon="pi pi-plus" class="p-button-sm" (click)="nuevo()"></button>
+            </div>
+          </lab-table-check>
         }
       </ng-template>
     </p-card>
@@ -97,7 +97,7 @@ export class LabCrudComponent implements OnInit {
   private toast = inject(MessageService)
 
   @Input({ required: true }) modelo!: string
-  @Input({ required: true }) carpeta!: string
+  @Input({ required: true }) dominio!: string
   @Input() tituloCentral = 'Datos'
   @Input() tituloPopup = 'Datos seleccionados'
   @Input() lengthCols = 3
@@ -118,6 +118,7 @@ export class LabCrudComponent implements OnInit {
   protected items = computed(() => this.rawData())
 
   protected singleSelect = computed(() => this.rawData().length > 0)
+
 
   protected columns = computed<TableColumn[]>(() => {
     const campos = this.rawCampos()
@@ -149,7 +150,7 @@ export class LabCrudComponent implements OnInit {
   private async loadData(): Promise<void> {
     this.loading.set(true)
     try {
-      const res = await firstValueFrom(this.api.get(this.carpeta, this.modelo))
+      const res = await firstValueFrom(this.api.get(this.dominio, this.modelo))
       if (res.ok) {
         const key = Object.keys(res.data)[0]
         const entity = res.data[key]
@@ -161,6 +162,7 @@ export class LabCrudComponent implements OnInit {
           this.rawData.set([])
         }
       } else {
+        console.error('Error al obtener datos:', res)
         this.toast.add({ severity: 'error', summary: 'Error', detail: 'Error al obtener datos', life: 8000 })
       }
     } catch {
@@ -173,7 +175,7 @@ export class LabCrudComponent implements OnInit {
     this.formLoading.set(true)
     this.formSchema.set(null)
     try {
-      const res = await firstValueFrom(this.api.get(this.carpeta, this.linked(), { idx }))
+      const res = await firstValueFrom(this.api.get(this.dominio, this.linked(), { idx }))
       if (res.ok) {
         const key = Object.keys(res.data)[0]
         const entity = res.data[key]
@@ -188,40 +190,7 @@ export class LabCrudComponent implements OnInit {
   }
 
   private buildFormSchema(entity: DynamicEntityData): void {
-    const campos = entity.campos
-    const valores = (entity.valores as Record<string, any>) || {}
-    const sectionCampos: Record<string, DynamicFieldConfig> = {}
-
-    if (Array.isArray(campos)) {
-      for (const c of campos as CamposItem[]) {
-        sectionCampos[c.value] = {
-          label: c.text,
-          editable: true,
-          required: false,
-          typeCode: 'TT' as FieldTypeCode,
-        }
-      }
-    } else {
-      for (const [field, campo] of Object.entries(campos as DynamicFormCampos)) {
-        sectionCampos[field] = {
-          label: campo[0],
-          editable: campo[1],
-          required: campo[2],
-          typeCode: campo[3] as FieldTypeCode,
-          maxLength: campo[4],
-        }
-      }
-    }
-
-    this.formSchema.set({
-      datos: {
-        label: 'Datos',
-        linked: entity.linked,
-        model: this.modelo,
-        campos: sectionCampos,
-        valores,
-      },
-    })
+    this.formSchema.set(toDynamicFormSchema(entity, this.modelo))
   }
 
   protected nuevo(): void {
@@ -264,11 +233,7 @@ export class LabCrudComponent implements OnInit {
         ...values['datos'],
       }
 
-      if (this.isNew()) {
-        await firstValueFrom(this.api.post(this.carpeta, this.modelo, body))
-      } else {
-        await firstValueFrom(this.api.put(this.carpeta, this.modelo, body))
-      }
+      await firstValueFrom(this.api.save(this.dominio, this.linked(), body))
 
       this.toast.add({ severity: 'success', summary: 'Éxito', detail: 'Registro guardado correctamente', life: 5000 })
       this.swPopup.set(false)
@@ -280,21 +245,15 @@ export class LabCrudComponent implements OnInit {
     this.saving.set(false)
   }
 
-  protected async onDelete(item: any): Promise<void> {
+  protected onDelete(item: any): void {
     const idx = item?.idx ?? item?.idl
     if (idx === undefined || idx === null) return
 
-    const confirmed = window.confirm('¿Está seguro de eliminar este registro?')
-    if (!confirmed) return
-
-    this.loading.set(true)
-    try {
-      await firstValueFrom(this.api.remove(this.carpeta, this.modelo, String(idx)))
-      this.toast.add({ severity: 'success', summary: 'Éxito', detail: 'Registro eliminado correctamente', life: 5000 })
-      await this.loadData()
-    } catch {
-      this.toast.add({ severity: 'error', summary: 'Error', detail: 'Error al eliminar', life: 8000 })
-    }
-    this.loading.set(false)
+    this.toast.add({
+      severity: 'warn',
+      summary: 'No disponible',
+      detail: 'El backend aún no expone un endpoint de eliminación',
+      life: 5000,
+    })
   }
 }

@@ -5,4 +5,5 @@ export * from './models/dynamic-api.models'
 export * from './components/dynamic-form'
 export * from './components/table'
 export * from './components/crud'
+export * from './components/tabstep'
 

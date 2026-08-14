@@ -8,7 +8,7 @@ import { LabCrudComponent } from '../../shared/components/crud/lab-crud.componen
   template: `
     <lab-crud
       modelo="serviciosn"
-      carpeta="areas"
+      dominio="areas"
       [lengthCols]="6"
       tituloCentral="Servicio"
       tituloPopup="Formulario de datos"

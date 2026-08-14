@@ -24,7 +24,7 @@ export const environment = {
   citaMedicaApi: 'https://api-desarrollo.cns.gob.bo/api/ct',
   vigenciaApi: 'https://api-desarrollo.cns.gob.bo/api/vg',
   laboratorioApi: 'https://api-desarrollo.cns.gob.bo/api/lab',
-  lisApi: 'http://localhost:5000/api/',
+  lisApi: 'https://localhost:5001/v1/',
   theme: 'layout-cns-nacional',
   version: 'dev-local',
   deployDate: 'local',

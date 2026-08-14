@@ -1,10 +1,11 @@
-import { Component, Input, Output, EventEmitter, computed, signal, ViewChild, AfterViewInit } from '@angular/core'
 import { NgClass, NgTemplateOutlet } from '@angular/common'
+import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild, computed } from '@angular/core'
 import { FormsModule } from '@angular/forms'
-import { Table, TableModule } from 'primeng/table'
-import { InputTextModule } from 'primeng/inputtext'
 import { ButtonModule } from 'primeng/button'
+import { InputTextModule } from 'primeng/inputtext'
+import { Table, TableModule } from 'primeng/table'
 import { TooltipModule } from 'primeng/tooltip'
+
 import { TableColumn } from './table-check.models'
 
 @Component({
@@ -13,7 +14,7 @@ import { TableColumn } from './table-check.models'
   imports: [NgClass, NgTemplateOutlet, FormsModule, TableModule, InputTextModule, ButtonModule, TooltipModule],
   template: `
     <div class="lab-table-wrapper">
-      @if (processedData().length > 0) {
+      @if (processedData().length > 10) {
         <div class="lab-table-search">
           <input pInputText
             [(ngModel)]="searchText"
@@ -40,10 +41,17 @@ import { TableColumn } from './table-check.models'
         [scrollHeight]="maxHeight + 'px'"
         styleClass="p-datatable-sm lab-table"
         [ngClass]="'sticky-column'"
+        class="p-datatable-striped responsive-table"
       >
+        
+         
         <ng-template pTemplate="caption">
-          <div class="lab-table-header" [style]="{ background: colorHex, color: '#fff' }">
-            <span class="font-weight-bold text-sm">{{ caption() }}</span>
+          <div class="lab-table-header">
+            @if (caption.trim()) {
+              <span class="font-weight-bold text-sm">{{ caption }}</span>
+            } @else {
+              <ng-content select="[labTableCaption]"></ng-content>
+            }
           </div>
         </ng-template>
 
@@ -84,18 +92,7 @@ import { TableColumn } from './table-check.models'
                   } @else {
                     <p-tableCheckbox [value]="rowData" />
                   }
-                  @if (withEdit) {
-                    <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-text p-button-sm"
-                      (click)="handleEdit(rowData, $event)"
-                      pTooltip="Editar"
-                    ></button>
-                  }
-                  @if (withDel) {
-                    <button pButton icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger p-button-sm"
-                      (click)="handleDelete(rowData, $event)"
-                      pTooltip="Eliminar"
-                    ></button>
-                  }
+                  
                 </div>
               </td>
             }
@@ -104,7 +101,7 @@ import { TableColumn } from './table-check.models'
                 {{ resolveFieldData(rowData, col.field) }}
               </td>
             }
-            @if (!showSelect && (withEdit || withDel)) {
+            @if (withEdit || withDel) {
               <td>
                 @if (withEdit) {
                   <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-text p-button-sm"
@@ -172,8 +169,9 @@ export class TableCheckComponent implements AfterViewInit {
   @Input() withDel = false
   @Input() withEdit = false
   @Input() maxHeight = 500
-  @Input() showSelect = true
+  @Input() showSelect = false
   @Input() dataKey = 'idl'
+  @Input() caption = ''
   @Input() expandTemplate: any = null
   @Input() globalFilterFields: string[] = []
 
@@ -213,10 +211,6 @@ export class TableCheckComponent implements AfterViewInit {
       'lab-row-even': idx !== undefined && idx % 2 === 0,
       'lab-row-odd': idx !== undefined && idx % 2 !== 0,
     }
-  }
-
-  protected caption(): string {
-    return ''
   }
 
   protected onSearch(value: string): void {

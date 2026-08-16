@@ -1,0 +1,17 @@
+export const laboratorioMessages: Record<string, string> = {
+  LAB_OK_0001: 'Operación exitosa',
+  LAB_OK_0002: 'Registro guardado correctamente',
+  LAB_OK_0003: 'Registro actualizado correctamente',
+  LAB_OK_0004: 'Registro eliminado correctamente',
+  LAB_ERR_1001: 'Error al guardar la orden',
+  LAB_ERR_1002: 'No se encontraron resultados para el paciente',
+  LAB_ERR_1003: 'Error de conexión con el servidor',
+  LAB_ERR_1004: 'La muestra {{codigo}} no es válida',
+  LAB_ERR_1005: 'Error al procesar la solicitud',
+  LAB_ERR_1006: 'El campo {{campo}} es obligatorio',
+  LAB_WARN_2001: 'La muestra está vencida',
+  LAB_WARN_2002: '¿Está seguro de eliminar este registro?',
+  LAB_WARN_2003: 'Hay cambios sin guardar',
+  LAB_INFO_3001: 'Procesando solicitud...',
+  LAB_INFO_3002: 'Cargando datos...',
+}

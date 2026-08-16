@@ -1,0 +1,20 @@
+@for (section of schema | keyvalue: preserveOrder; track section.key) {
+  <p-card [style]="{ marginBottom: '1rem' }">
+    <ng-template pTemplate="title">
+      {{ section.value.label || section.key }}
+    </ng-template>
+    <ng-template pTemplate="content">
+      <div class="grid">
+        @for (campo of section.value.campos | keyvalue: preserveOrder; track campo.key) {
+          <lab-dynamic-field
+            [formGroup]="getGroup(section.key)"
+            [fieldName]="campo.key"
+            [config]="campo.value"
+            [valores]="section.value.valores"
+            [colSpan]="campo.value.typeCode === 'H' ? 12 : (lengthCols || 3)"
+          />
+        }
+      </div>
+    </ng-template>
+  </p-card>
+}

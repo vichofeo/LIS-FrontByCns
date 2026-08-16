@@ -1,1 +1,1 @@
-export * from './lab-crud.component'
+export * from './lab-crud'

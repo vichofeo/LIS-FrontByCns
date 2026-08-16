@@ -1,2 +1,2 @@
 export * from './table-check.models'
-export * from './table-check.component'
+export * from './table-check'

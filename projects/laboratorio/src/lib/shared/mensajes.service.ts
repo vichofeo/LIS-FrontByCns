@@ -1,10 +1,11 @@
 import { Injectable, inject } from '@angular/core'
 import { MessageService } from 'primeng/api'
-import messages from './messages/laboratorio-messages.json'
+
+import { laboratorioMessages } from './messages/laboratorio-messages'
 
 @Injectable({ providedIn: 'root' })
 export class MensajesService {
-  private msj = messages as Record<string, string>
+  private msj = laboratorioMessages
   private toast = inject(MessageService)
 
   get(code: string, params?: Record<string, string>): string {

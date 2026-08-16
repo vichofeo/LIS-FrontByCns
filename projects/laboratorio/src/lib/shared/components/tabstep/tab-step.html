@@ -1,0 +1,65 @@
+<p-toast />
+
+@if (loading()) {
+  <div class="flex justify-content-center p-4">
+    <p-progressSpinner />
+  </div>
+} @else {
+  @if (!swStepper) {
+    <p-tabs [(value)]="activeIndex">
+      <p-tablist>
+        @for (tab of tabs(); track tab.model; let i = $index) {
+          <p-tab [value]="i">
+            <i [class]="iconClass(tab.icon)"></i> {{ tab.label }}
+          </p-tab>
+        }
+      </p-tablist>
+      <p-tabpanels>
+        @for (tab of tabs(); track tab.model; let i = $index) {
+          <p-tabpanel [value]="i">
+            <p-card>
+              <ng-template pTemplate="content">
+                @if (schemas()[tab.model]) {
+                  <lab-dynamic-form #dynForm [schema]="schemas()[tab.model]!" [lengthCols]="lengthCols" />
+                } @else {
+                  <div class="flex justify-content-center p-4">
+                    <p-progressSpinner />
+                  </div>
+                }
+              </ng-template>
+            </p-card>
+            <div class="flex justify-content-end gap-2 mt-3">
+              <p-button label="Cancelar" severity="secondary" (onClick)="handleClose()" />
+              <p-button label="Guardar" [loading]="saving()" (onClick)="saveModel(tab.model)" />
+            </div>
+          </p-tabpanel>
+        }
+      </p-tabpanels>
+    </p-tabs>
+  } @else {
+    <p-steps [model]="stepsModel()" [(activeIndex)]="stepIndex" [readonly]="false" />
+    @for (tab of tabs(); track tab.model; let i = $index) {
+      <div [hidden]="stepIndex() !== i">
+        <p-card [style]="{ marginTop: '1rem' }">
+          <ng-template pTemplate="content">
+            @if (schemas()[tab.model]) {
+              <lab-dynamic-form #dynForm [schema]="schemas()[tab.model]!" [lengthCols]="lengthCols" />
+            } @else {
+              <div class="flex justify-content-center p-4">
+                <p-progressSpinner />
+              </div>
+            }
+          </ng-template>
+        </p-card>
+        <div class="flex justify-content-end gap-2 mt-3">
+          <p-button label="Cancelar" severity="secondary" (onClick)="handleClose()" />
+          <p-button
+            [label]="isLastStep(i) ? 'Guardar' : 'Continuar'"
+            [loading]="saving()"
+            (onClick)="nextStep(i)"
+          />
+        </div>
+      </div>
+    }
+  }
+}

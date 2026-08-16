@@ -1,63 +1,120 @@
 # Laboratorio
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.0.
+Librería de dominio del módulo de **laboratorio** del Sistema de Salud CNS. Implementa el **motor de formularios dinámicos server-driven** (migrado de Vue/Vuetify) y los subdominios del laboratorio.
 
-## Code scaffolding
+El backend es un motor CRUD dinámico `.NET` (proyecto `servicio-back`) que entrega la estructura de cada formulario/grilla. El frontend solo consume `{ ok, data, message }` y renderiza componentes PrimeNG según el `typeCode` de cada campo.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Estructura
 
-```bash
-ng generate component component-name
+```
+projects/laboratorio/src/lib/
+├── laboratorio.routing.ts        ← rutas raíz (lazy) hacia los subdominios
+├── laboratorio.ts                ← componente stub "laboratorio works!"
+├── shared/                       ← transversal / utilitario (exportado)
+│   ├── laboratorio-config.ts     ← token LIS_API_BASE_URL
+│   ├── mensajes.service.ts       ← toasts por código de mensaje
+│   ├── laboratorio-logger.service.ts
+│   ├── services/dynamic-api.service.ts
+│   ├── models/dynamic-api.models.ts
+│   ├── utils/dynamic-form-schema.util.ts
+│   ├── messages/laboratorio-messages.ts
+│   └── components/
+│       ├── dynamic-form/         ← lab-dynamic-form + lab-dynamic-field
+│       ├── table/                ← lab-table-check
+│       ├── crud/                 ← lab-crud
+│       └── tabstep/              ← lab-tab-step
+├── pr/                           ← subdominio "pr" (2 páginas reales)
+│   ├── pr.routing.ts
+│   └── pages/ (servicios, cfg-areas)
+├── parametrizacion/              ← subdominio vacío (routing [])
+├── configuracion/                ← subdominio vacío
+├── preanalitica/                 ← subdominio vacío
+├── analitica/                    ← subdominio vacío
+└── postanalitica/                ← subdominio vacío
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## API pública
 
-```bash
-ng generate --help
+Todo lo que se consume desde fuera se exporta en `src/public-api.ts`:
+
+- `laboratorioRoutes` (rutas raíz)
+- `LIS_API_BASE_URL` (InjectionToken)
+- `MensajesService`, `LaboratorioLogger`
+- `DynamicApiService`
+- Modelos: `DynamicResponse`, `DynamicAgrupadoResponse`, `DynamicEntityData`, `DynamicListItem`, `DynamicFormCampos`, `DynamicGroup`, etc.
+- Componentes: `LabCrud`, `TabStep`, `DynamicForm`, `DynamicField`, `TableCheck`
+- Tipos: `DynamicFormSchema`, `DynamicFieldConfig`, `FieldTypeCode`, `TableColumn`, `TableRow`, etc.
+
+## Componentes
+
+| Componente | Selector | Propósito |
+|---|---|---|
+| `LabCrud` | `<lab-crud>` | CRUD completo: grilla (`lab-table-check`) + popup con formulario (`lab-dynamic-form`). Inputs `modelo`, `dominio`, `tituloCentral`, `tituloPopup`, `lengthCols`. |
+| `TabStep` | `<lab-tab-step>` | Wizard de modelos agrupados (`agrupado`) en modo tabs o stepper. Inputs `modelGroup`, `dominio`, `idxSelected`, `swStepper`, `lengthCols`. Outputs `saved`, `closed`. |
+| `DynamicForm` | `<lab-dynamic-form>` | Renderiza un `DynamicFormSchema` en tarjetas; construye los `FormGroup`. |
+| `DynamicField` | `<lab-dynamic-field>` | Resuelve `typeCode` → componente PrimeNG. |
+| `TableCheck` | `<lab-table-check>` | Tabla con selección, búsqueda, orden y acciones. |
+
+### Ejemplo
+
+```typescript
+import { Component } from '@angular/core'
+import { LabCrud } from 'laboratorio'
+
+@Component({
+  selector: 'lab-servicios-page',
+  standalone: true,
+  imports: [LabCrud],
+  templateUrl: './servicios.html',
+  styleUrl: './servicios.scss',
+})
+export class Servicios {}
 ```
 
-## Building
+## Contrato backend (`DynamicApiService`)
 
-To build the library, run:
+Base: `${LIS_API_BASE_URL}dinamico/{dominio}/{modelo}`.
 
-```bash
-ng build laboratorio
+| Método | Verbo | Endpoint | Uso |
+|---|---|---|---|
+| `get(dominio, modelo, params?)` | GET | `/{dominio}/{modelo}?idx=` | grilla / formulario |
+| `save(dominio, modelo, body)` | POST | `/{dominio}/{modelo}/save` | insertar / actualizar `{ idx?, ...datos }` |
+| `cbox(dominio, modelo, values)` | POST | `/{dominio}/{modelo}/cbox` | combos dependientes |
+| `agrupado(dominio, modelo)` | POST | `/{dominio}/{modelo}/agrupado` | modelos agrupados (wizard) |
+
+> **No hay PUT/DELETE.** El backend no expone endpoints de eliminación: `lab-crud.onDelete()` solo muestra un toast de "no disponible".
+
+## Configuración
+
+La URL base se inyecta vía el token `LIS_API_BASE_URL` (no se importa `environment` dentro de la lib). La app lo provee en `src/app/app.config.ts`:
+
+```typescript
+import { LIS_API_BASE_URL } from 'laboratorio'
+import { environment } from '@env/environment'
+
+providers: [
+  { provide: LIS_API_BASE_URL, useValue: environment.lisApi },
+]
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+## Subdominios
 
-### Publishing the Library
+Rutas resueltas hoy (bajo `/admin/laboratorio/`):
 
-Once the project is built, you can publish your library by following these steps:
+- `/pr/servicios` → `lab-crud`
+- `/pr/cfg-areas` → `lab-tab-step`
 
-1. Navigate to the `dist` directory:
-   ```bash
-   cd dist/laboratorio
-   ```
+Pendientes (routing `[]`): `parametrizacion`, `configuracion`, `preanalitica`, `analitica`, `postanalitica`.
 
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
+## Documentación detallada
 
-## Running unit tests
+- `docs/laboratorio/dynamic-form.md` — contrato de formularios dinámicos, type codes y componentes.
+- `docs/laboratorio/skills/SKILL.md` — migración del módulo `acrehab`.
+- `docs/laboratorio/skills/SKILL-TabStep.md` — migración del patrón TabStep.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Build
 
 ```bash
-ng test
+ng build laboratorio --configuration development
+ng build laboratorio   # producción
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

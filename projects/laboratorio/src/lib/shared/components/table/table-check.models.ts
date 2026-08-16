@@ -1,3 +1,5 @@
+export type TableRow = Record<string, unknown>
+
 export interface TableColumn {
   field: string
   header: string
@@ -9,5 +11,5 @@ export interface TableColumn {
 
 export interface TableCheckEvent {
   originalEvent: Event
-  data: any
+  data: unknown
 }

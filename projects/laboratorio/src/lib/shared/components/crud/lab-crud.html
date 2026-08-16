@@ -1,0 +1,62 @@
+<p-toast />
+<p-confirmDialog />
+
+<p-card>
+  <ng-template pTemplate="title">
+    <div class="flex justify-content-between align-items-center">
+      <span class="font-bold text-lg">{{ tituloCentral }}</span>          
+    </div>
+  </ng-template>
+  <ng-template pTemplate="content">
+    @if (loading()) {
+      <div class="flex justify-content-center p-4">
+        <p-progressSpinner />
+      </div>
+    } @else if (items().length === 0) {
+      <div class="text-center text-500 p-4">-Sin Dato-</div>
+    } @else {
+      <lab-table-check
+        [itemsPerPage]="10"
+        [showSelect]="true"
+        [singleSelect]="true"
+        [withDel]="true"
+        [withEdit]="true"
+        [columns]="columns()"
+        [data]="items()"
+        [globalFilterFields]="filterFields()"
+        (editItem)="onEdit($event)"
+        (deleteItem)="onDelete($event)"
+      >
+        <div labTableCaption class="flex justify-content-between align-items-center">
+          <button pButton label="Nuevo registro" icon="pi pi-plus" class="p-button-sm" (click)="nuevo()"></button>
+        </div>
+      </lab-table-check>
+    }
+  </ng-template>
+</p-card>
+
+<p-dialog
+  [(visible)]="swPopup"
+  [header]="tituloPopup"
+  [modal]="true"
+  [style]="{ width: 'min(60vw, 900px)' }"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="cancelar()"
+>
+  @if (formLoading()) {
+    <div class="flex justify-content-center p-4">
+      <p-progressSpinner />
+    </div>
+  } @else if (formSchema()) {
+    <lab-dynamic-form
+      #dynamicForm
+      [schema]="formSchema()!"
+      [lengthCols]="lengthCols"
+    />
+  }
+  <ng-template pTemplate="footer">
+    <button pButton label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="cancelar()"></button>
+    <button pButton label="Guardar" icon="pi pi-check" (click)="guardar()" [loading]="saving()" [disabled]="formLoading()"></button>
+  </ng-template>
+</p-dialog>

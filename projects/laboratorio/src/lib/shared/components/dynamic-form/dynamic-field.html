@@ -1,0 +1,215 @@
+@if (config.typeCode === 'YT') {
+  <div [formGroup]="formGroup" class="col-12" [style]="{ display: 'none' }">
+    <input pInputText [formControlName]="fieldName" />
+  </div>
+} @else {
+  <div [formGroup]="formGroup" [style.grid-column]="'span ' + colSpan">
+    @if (config.typeCode === 'H') {
+      <div [style]="{ display: 'none' }">
+        <input pInputText [formControlName]="fieldName" />
+      </div>
+    } @else if (config.forcePlain || !config.editable) {
+      <div class="field">
+        <label [for]="fieldId">{{ config.label }}</label>
+        <input pInputText [id]="fieldId" [formControlName]="fieldName" readonly [value]="plainText" />
+      </div>
+    } @else {
+      @switch (config.typeCode) {
+        @case ('TT') {
+          <div class="field">
+            <label [for]="fieldId">{{ config.label }}@if (config.required) { <span class="text-red-500">*</span> }</label>
+            <input pInputText [id]="fieldId" [formControlName]="fieldName" />
+          </div>
+        }
+        @case ('TN') {
+          <div class="field">
+            <label [for]="fieldId">{{ config.label }}@if (config.required) { <span class="text-red-500">*</span> }</label>
+            <p-inputNumber [id]="fieldId" [formControlName]="fieldName" [minFractionDigits]="0" [maxFractionDigits]="0" />
+          </div>
+        }
+        @case ('TD') {
+          <div class="field">
+            <label [for]="fieldId">{{ config.label }}@if (config.required) { <span class="text-red-500">*</span> }</label>
+            <p-inputNumber [id]="fieldId" [formControlName]="fieldName" [min]="0" [max]="999.9999" [minFractionDigits]="2" [maxFractionDigits]="6" />
+          </div>
+        }
+        @case ('TM') {
+          <div class="field">
+            <label [for]="fieldId">{{ config.label }}@if (config.required) { <span class="text-red-500">*</span> }</label>
+            <input pInputText [id]="fieldId" [formControlName]="fieldName" type="email" />
+          </div>
+        }
+        @case ('TP') {
+          <div class="field">
+            <label [for]="fieldId">{{ config.label }}</label>
+            <input pInputText [id]="fieldId" [formControlName]="fieldName" readonly />
+          </div>
+        }
+        @case ('TA') {
+          <div class="field">
+            <label [for]="fieldId">{{ config.label }}@if (config.required) { <span class="text-red-500">*</span> }</label>
+            <textarea pTextarea [id]="fieldId" [formControlName]="fieldName" [rows]="config.rows || 3" [maxlength]="config.maxLength || 512"></textarea>
+          </div>
+        }
+        @case ('TAR') {
+          <div class="field">
+            <label [for]="fieldId">{{ config.label }}@if (config.required) { <span class="text-red-500">*</span> }</label>
+            <textarea pTextarea [id]="fieldId" [formControlName]="fieldName" [rows]="config.rows || 3" [maxlength]="config.maxLength || 512"></textarea>
+          </div>
+        }
+        @case ('C') {
+          <div class="field">
+            <label [for]="fieldId">{{ config.label }}@if (config.required) { <span class="text-red-500">*</span> }</label>
+            <p-select [id]="fieldId" [formControlName]="fieldName" [options]="comboOptions" optionLabel="label" optionValue="value" [showClear]="true" [style]="{ width: '100%' }">
+              <ng-template #selectedItem let-option>
+                <div class="combo-selected">
+                  <span class="combo-avatar">{{ option?.label?.slice(0, 1).toUpperCase() }}</span>
+                  <span class="combo-label">{{ option?.label }}</span>
+                </div>
+              </ng-template>
+            </p-select>
+          </div>
+        }
+        @case ('F') {
+          <div class="field">
+            <label [for]="fieldId">{{ config.label }}@if (config.required) { <span class="text-red-500">*</span> }</label>
+            <p-datepicker [id]="fieldId" [formControlName]="fieldName" [showIcon]="true" [iconDisplay]="'input'" [showClear]="true" [minDate]="minDate" [maxDate]="maxDate" dateFormat="dd/mm/yy"></p-datepicker>
+          </div>
+        }
+        @case ('FT') {
+          <div class="field">
+            <label [for]="fieldId">{{ config.label }}@if (config.required) { <span class="text-red-500">*</span> }</label>
+            <p-datepicker [id]="fieldId" [formControlName]="fieldName" [showIcon]="true" [iconDisplay]="'input'" [showClear]="true" [minDate]="minDate" [maxDate]="maxDate" dateFormat="dd/mm/yy"></p-datepicker>
+          </div>
+        }
+        @case ('FC') {
+          <div class="field">
+            <label [for]="fieldId">{{ config.label }}@if (config.required) { <span class="text-red-500">*</span> }</label>
+            <p-datepicker [id]="fieldId" [formControlName]="fieldName" [showIcon]="true" [iconDisplay]="'input'" [showClear]="true" [minDate]="minDate" [maxDate]="maxDate" dateFormat="dd/mm/yy"></p-datepicker>
+          </div>
+        }
+          @case ('RH') {
+            <div class="field">
+              <div class="boxnuevo">
+                <span class="boxnuevo-title">{{ config.label }}@if (config.required) { <span class="text-red-500">*</span> }</span>
+                <div class="flex flex-wrap gap-3">
+                  @for (opt of radioOptions; track opt.value) {
+                    <div class="flex align-items-center">
+                      <p-radioButton [inputId]="fieldId + '_' + $index" [value]="opt.value" [formControlName]="fieldName" />
+                      <label [for]="fieldId + '_' + $index" class="ml-1">{{ opt.label }}</label>
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+          }
+          @case ('RV') {
+            <div class="field">
+              <div class="boxnuevo">
+                <span class="boxnuevo-title">{{ config.label }}@if (config.required) { <span class="text-red-500">*</span> }</span>
+                <div class="flex flex-column gap-2">
+                  @for (opt of radioOptions; track opt.value) {
+                    <div class="flex align-items-center">
+                      <p-radioButton [inputId]="fieldId + '_' + $index" [value]="opt.value" [formControlName]="fieldName" />
+                      <label [for]="fieldId + '_' + $index" class="ml-1">{{ opt.label }}</label>
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+          }
+          @case ('HH') {
+            <div class="field">
+              <div class="boxnuevo">
+                <span class="boxnuevo-title">{{ config.label }}@if (config.required) { <span class="text-red-500">*</span> }</span>
+                <div class="flex flex-wrap gap-3">
+                  @for (opt of checkboxOptions; track opt.value) {
+                    <div class="flex align-items-center">
+                      <p-checkbox [inputId]="fieldId + '_' + $index" [value]="opt.value" [formControlName]="fieldName" />
+                      <label [for]="fieldId + '_' + $index" class="ml-1">{{ opt.label }}</label>
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+          }
+          @case ('HV') {
+            <div class="field">
+              <div class="boxnuevo">
+                <span class="boxnuevo-title">{{ config.label }}@if (config.required) { <span class="text-red-500">*</span> }</span>
+                <div class="flex flex-column gap-2">
+                  @for (opt of checkboxOptions; track opt.value; let i = $index) {
+                    @if (i < limit) {
+                      <div class="flex align-items-center">
+                        <p-checkbox [inputId]="fieldId + '_' + i" [value]="opt.value" [formControlName]="fieldName" />
+                        <label [for]="fieldId + '_' + i" class="ml-1">{{ opt.label }}</label>
+                      </div>
+                    }
+                  }
+                </div>
+                @if (checkboxOptions.length > limit) {
+                  <button pButton type="button" class="p-button-text p-button-sm" label="...Mostrar mas" (click)="showMore()"></button>
+                }
+                @if (limit > tope) {
+                  <button pButton type="button" class="p-button-text p-button-sm" label="...Mostrar menos" (click)="showLess()"></button>
+                }
+              </div>
+            </div>
+          }
+          @case ('SW') {
+            <div class="field">
+              <div class="flex align-items-center gap-2">
+                <p-toggleswitch [formControlName]="fieldName" />
+                <span>{{ config.label }}: {{ switchValue }}@if (config.required) { <span class="text-red-500">*</span> }</span>
+              </div>
+            </div>
+          }
+          @case ('MS') {
+            <div class="field">
+              <label [for]="fieldId">{{ config.label }}@if (config.required) { <span class="text-red-500">*</span> }</label>
+              <p-autoComplete [id]="fieldId" [formControlName]="fieldName" [suggestions]="filteredOptions" (completeMethod)="onFilter($event)" optionLabel="label" [dropdown]="true" [style]="{ width: '100%' }"></p-autoComplete>
+            </div>
+          }
+          @case ('MH') {
+            <div class="field">
+              <label [for]="fieldId">{{ config.label }}@if (config.required) { <span class="text-red-500">*</span> }</label>
+              <div [id]="fieldId" class="chips-box">
+                @for (chip of chips; track $index; let i = $index) {
+                  <p-chip [label]="chip" [removable]="true" (onRemove)="removeChip(i)" />
+                }
+                <input type="text" class="chips-input" [placeholder]="config.label" (keydown.enter)="addChip($event)" (blur)="addChip($event)" />
+              </div>
+            </div>
+          }
+          @case ('FA') {
+            <div class="field">
+              <span>{{ config.label }}@if (config.required) { <span class="text-red-500">*</span> }</span>
+              @if (previewUrl()) {
+                <img [src]="previewUrl()" class="file-preview" alt="" />
+              }
+              <div class="flex align-items-center gap-2">
+                <p-fileUpload mode="basic" [customUpload]="true" chooseLabel="Elegir archivo" (onSelect)="onFileSelect($event)"></p-fileUpload>
+                @if (previewUrl()) {
+                  <button pButton type="button" class="p-button-text p-button-sm" label="Quitar" (click)="clearFile()"></button>
+                }
+              </div>
+            </div>
+          }
+          @case ('FI') {
+            <div class="field">
+              <span>{{ config.label }}@if (config.required) { <span class="text-red-500">*</span> }</span>
+              @if (previewUrl()) {
+                <img [src]="previewUrl()" class="file-preview" alt="" />
+              }
+              <div class="flex align-items-center gap-2">
+                <p-fileUpload mode="basic" [customUpload]="true" chooseLabel="Elegir imagen" accept="image/*" (onSelect)="onFileSelect($event)"></p-fileUpload>
+                @if (previewUrl()) {
+                  <button pButton type="button" class="p-button-text p-button-sm" label="Quitar" (click)="clearFile()"></button>
+                }
+              </div>
+            </div>
+          }
+        }
+      }
+  </div>
+}

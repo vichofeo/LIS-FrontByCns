@@ -1,3 +1,4 @@
+export * from './laboratorio-config'
 export * from './mensajes.service'
 export * from './laboratorio-logger.service'
 export * from './services/dynamic-api.service'
@@ -6,4 +7,5 @@ export * from './components/dynamic-form'
 export * from './components/table'
 export * from './components/crud'
 export * from './components/tabstep'
+export * from './components/combo-dependency'
 

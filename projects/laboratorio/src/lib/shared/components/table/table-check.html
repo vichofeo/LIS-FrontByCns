@@ -1,0 +1,118 @@
+<div class="lab-table-wrapper">
+  @if (processedData().length > 10) {
+    <div class="lab-table-search">
+      <input pInputText
+        [(ngModel)]="searchText"
+        (ngModelChange)="onSearch($event)"
+        placeholder="Filtrar datos..."
+        class="p-inputtext-sm"
+      />
+    </div>
+  }
+
+  <p-table
+    #dt
+    [value]="processedData()"
+    [columns]="processedColumns()"
+    [dataKey]="dataKey"
+    [(selection)]="selectedItems"
+    (selectionChange)="onSelectionChange($event)"
+    [selectionMode]="singleSelect ? 'single' : 'multiple'"
+    [rows]="itemsPerPage"
+    [paginator]="processedData().length > itemsPerPage"
+    [rowHover]="true"
+    [globalFilterFields]="globalFilterFields"
+    [scrollable]="true"
+    [scrollHeight]="maxHeight + 'px'"
+    styleClass="p-datatable-sm lab-table"
+    [ngClass]="'sticky-column'"
+    class="p-datatable-striped responsive-table"
+  >
+    
+     
+    <ng-template pTemplate="caption">
+      <div class="lab-table-header">
+        @if (caption.trim()) {
+          <span class="font-weight-bold text-sm">{{ caption }}</span>
+        } @else {
+          <ng-content select="[labTableCaption]"></ng-content>
+        }
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        @if (showSelect) {
+          <th style="width: 3rem; position: sticky; left: 0; z-index: 4; background: inherit;">
+            @if (!singleSelect) {
+              <p-tableHeaderCheckbox />
+            }
+          </th>
+        }
+        @for (col of columns; track col.field) {
+          <th
+            [pSortableColumn]="col.sortable ? col.field : null"
+            [style]="{ textAlign: col.align || 'left', width: col.width || 'auto' }"
+            [class]="thClass()"
+          >
+            {{ col.header }}
+            @if (col.sortable) {
+              <p-sortIcon [field]="col.field" />
+            }
+          </th>
+        }
+        @if (withEdit || withDel) {
+          <th style="width: 7rem" [class]="thClass()">Acción</th>
+        }
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+      <tr [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex" [ngClass]="rowClassObj(rowData)">
+        @if (showSelect) {
+          <td style="position: sticky; left: 0; z-index: 2; background: inherit;">
+            <div class="flex align-items-center gap-1">
+              @if (singleSelect) {
+                <p-tableRadioButton [value]="rowData" />
+              } @else {
+                <p-tableCheckbox [value]="rowData" />
+              }
+              
+            </div>
+          </td>
+        }
+        @for (col of processedColumns(); track col.field) {
+          <td [style]="{ textAlign: col.align || 'left' }">
+            {{ resolveFieldData(rowData, col.field) }}
+          </td>
+        }
+        @if (withEdit || withDel) {
+          <td>
+            @if (withEdit) {
+              <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-text p-button-sm"
+                (click)="handleEdit(rowData)"
+                pTooltip="Editar"
+              ></button>
+            }
+            @if (withDel) {
+              <button pButton icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger p-button-sm"
+                (click)="handleDelete(rowData)"
+                pTooltip="Eliminar"
+              ></button>
+            }
+          </td>
+        }
+      </tr>
+    </ng-template>
+
+    @if (expandable) {
+      <ng-template pTemplate="rowexpansion" let-rowData>
+        <tr>
+          <td [attr.colspan]="processedColumns().length + (showSelect ? 1 : 0) + ((withEdit || withDel) ? 1 : 0)" class="p-3">
+            <ng-container *ngTemplateOutlet="expandTemplate; context: { $implicit: rowData }" />
+          </td>
+        </tr>
+      </ng-template>
+    }
+  </p-table>
+</div>

@@ -1,0 +1,26 @@
+<div class="contexto-usuario">
+  <div class="contexto-item">
+    <span class="contexto-label">Usuario</span>
+    <span class="contexto-value">{{ usuario() }}</span>
+  </div>
+  <div class="contexto-item">
+    <span class="contexto-label">Rol</span>
+    <span class="contexto-value">{{ rol() }}</span>
+  </div>
+  <div class="contexto-item">
+    <span class="contexto-label">Establecimiento</span>
+    <span class="contexto-value">{{ establecimiento() }}</span>
+  </div>
+  <div class="contexto-item">
+    <span class="contexto-label">Regional</span>
+    <span class="contexto-value">{{ regional() }}</span>
+  </div>
+</div>
+
+<lab-crud
+  modelo="serviciosn"
+  dominio="areas"
+  [lengthCols]="6"
+  tituloCentral="Servicio"
+  tituloPopup="Formulario de datos"
+/>

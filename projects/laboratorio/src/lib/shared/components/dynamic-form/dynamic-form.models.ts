@@ -19,6 +19,9 @@ export interface DynamicFieldConfig {
   typeCode: FieldTypeCode;
   maxLength?: number;
   forcePlain?: boolean;
+  multiple?: boolean;
+  rows?: number;
+  sinInicial?: boolean;
 }
 
 export interface DynamicFormSection {
@@ -26,9 +29,7 @@ export interface DynamicFormSection {
   linked?: string;
   model?: string;
   campos: Record<string, DynamicFieldConfig>;
-  valores: Record<string, any>;
+  valores: Record<string, unknown>;
 }
 
-export interface DynamicFormSchema {
-  [sectionKey: string]: DynamicFormSection;
-}
+export type DynamicFormSchema = Record<string, DynamicFormSection>;

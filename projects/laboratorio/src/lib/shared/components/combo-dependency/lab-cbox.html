@@ -1,0 +1,31 @@
+<p-toast position="top-right"></p-toast>
+
+@if (loading()) {
+  <div class="flex justify-content-center py-3">
+    <p-progressSpinner [style]="{ width: '2rem', height: '2rem' }"></p-progressSpinner>
+  </div>
+}
+
+@if (formGroup) {
+  <div class="grid" [formGroup]="formGroup">
+    @for (entry of campoEntries; track entry.key) {
+      <div class="cbox-col" [style.grid-column]="'span ' + (colsWidth || 6)">
+        <div class="field">
+          <span class="field-label">{{ entry.config[0] }}</span>
+          @if (isMultiple(entry.key)) {
+            <p-multiSelect [formControlName]="entry.key" [options]="options(entry.key)" optionLabel="text" optionValue="value" [showClear]="true" [disabled]="disabled" [style]="{ width: '100%' }" (onChange)="onComboChange()"></p-multiSelect>
+          } @else {
+            <p-select [formControlName]="entry.key" [options]="options(entry.key)" optionLabel="text" optionValue="value" [showClear]="true" [disabled]="disabled" [style]="{ width: '100%' }" (onChange)="onComboChange()">
+              <ng-template #selectedItem let-option>
+                <div class="combo-selected">
+                  <span class="combo-avatar">{{ option?.text?.slice(0, 1).toUpperCase() }}</span>
+                  <span class="combo-label">{{ option?.text }}</span>
+                </div>
+              </ng-template>
+            </p-select>
+          }
+        </div>
+      </div>
+    }
+  </div>
+}

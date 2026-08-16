@@ -1,2 +1,2 @@
 export * from './tabstep.models'
-export * from './tab-step.component'
+export * from './tab-step'

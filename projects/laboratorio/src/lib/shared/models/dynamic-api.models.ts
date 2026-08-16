@@ -12,18 +12,14 @@ export interface DynamicSelectItem {
 
 export type DynamicFieldValue = string | number | boolean | null | DynamicFieldCombo
 
-export interface DynamicFormValues {
-  [field: string]: DynamicFieldValue
-}
+export type DynamicFormValues = Record<string, DynamicFieldValue>;
 
-export interface DynamicFormCampos {
-  [field: string]: [string, boolean, boolean, string, number?]
-}
+export type DynamicFormCampos = Record<string, [string, boolean, boolean, string, number?, unknown?, unknown?, unknown?]>;
 
 export interface DynamicListItem {
-  [field: string]: unknown
   idx: string
   linked?: string
+  [field: string]: unknown
 }
 
 export interface DynamicListCampos {
@@ -53,5 +49,23 @@ export interface DynamicAgrupadoResponse {
 export interface DynamicResponse {
   ok: boolean
   data: Record<string, DynamicEntityData>
+  message: string
+}
+
+export interface DynamicCboxField {
+  selected: DynamicSelectItem | DynamicSelectItem[]
+  items: DynamicSelectItem[]
+}
+
+export interface DynamicCboxData {
+  campos?: Record<string, unknown[]>
+  valores?: Record<string, DynamicCboxField>
+  dataTable?: unknown
+  headers?: unknown
+}
+
+export interface DynamicCboxResponse {
+  ok: boolean
+  data: DynamicCboxData
   message: string
 }
